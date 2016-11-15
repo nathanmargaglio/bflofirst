@@ -37,15 +37,15 @@ def _add_data():
         print row[0]
         row[1][pd.isnull(row[1])]=None
         p = Listing()
-        try:
-            p.addViaRow(row[1])
-            db.session.add(p)
-            db.session.commit()
-        except:
-            print("An error occurred: ")
-            for j in row[1]:
-                print(j)
-            print
+        #try:
+        p.addViaRow(row[1])
+        db.session.add(p)
+        db.session.commit()
+        #except:
+        #    print("An error occurred: ")
+        #    for j in row[1]:
+        #        print(j)
+        #    print
     os.remove("full_data.csv")
             
 def register(email, password):
