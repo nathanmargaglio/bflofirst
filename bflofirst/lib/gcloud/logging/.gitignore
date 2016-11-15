@@ -1,0 +1,15 @@
+/__init__.pyc
+/_gax.pyc
+/client.pyc
+/connection.pyc
+/entries.pyc
+/logger.pyc
+/metric.pyc
+/sink.pyc
+/test__gax.pyc
+/test_client.pyc
+/test_connection.pyc
+/test_entries.pyc
+/test_logger.pyc
+/test_metric.pyc
+/test_sink.pyc

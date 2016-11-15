@@ -1,0 +1,10 @@
+/__init__.pyc
+/acl.pyc
+/bucket.pyc
+/bucketlistresultset.pyc
+/connection.pyc
+/cors.pyc
+/key.pyc
+/lifecycle.pyc
+/resumable_upload_handler.pyc
+/user.pyc

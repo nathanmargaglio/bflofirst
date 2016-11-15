@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>BfloDS Label Generator</title>
+	
+	<style type="text/css">
+		@page { margin-left: 0.3in; margin-right: 0.31in; margin-top: 0.5in; margin-bottom: 0.42in }
+		p { margin-bottom: 0.1in; direction: ltr; color: #000000; line-height: 74%; orphans: 2; widows: 2 }
+		p.western { font-family: "Calibri", sans-serif; font-size: 11pt; so-language: en-US }
+		p.cjk { font-family: "Times New Roman", serif; font-size: 11pt }
+		p.ctl { font-family: "Times New Roman", serif; font-size: 11pt; so-language: ar-SA }
+	</style>
+	
+</head>
+<body lang="en-US" text="#000000" dir="ltr">
+<table width="758" cellpadding="8" cellspacing="0" style="page-break-before: always; width: 100%; height: 100%; margin: 0 auto;">
+	{% for y in range(20) %}
+	<col width="152">
+	<col width="13">
+	<col width="152">
+	<col width="13">
+	<col width="152">
+	<col width="13">
+	<col width="152">
+	<tr>
+		{% for x in range(4) %}
+		<td width="152" height="32" style="border: none; padding: 0in">
+			{% if data[y][x] %}
+				<p align="center" style="margin-left: 0.02in; margin-right: 0.02in; margin-top: 0.02in; margin-bottom: 0.02in">
+				<font face="Arial, sans-serif"><font size="1" style="font-size: 8pt"> {{data[y][x][0]}} </font></font></p>
+				<p align="center" style="margin-left: 0.02in; margin-right: 0.02in; margin-top: 0.02in; margin-bottom: 0.02in">
+				<font face="Arial, sans-serif"><font size="1" style="font-size: 8pt"> {{data[y][x][1]}} </font></font></p>
+				<p align="center" style="margin-left: 0.02in; margin-right: 0.02in; margin-top: 0.02in">
+				<font face="Arial, sans-serif"><font size="1" style="font-size: 8pt"> {{data[y][x][2]}}</font></font></p>
+			{% else %}
+				<p align="center" style="margin-left: 0.02in; margin-right: 0.02in; margin-top: 0.02in; margin-bottom: 0.02in">
+				<font face="Arial, sans-serif"><font size="1" style="font-size: 8pt"> &nbsp; </font></font></p>
+				<p align="center" style="margin-left: 0.02in; margin-right: 0.02in; margin-top: 0.02in; margin-bottom: 0.02in">
+				<font face="Arial, sans-serif"><font size="1" style="font-size: 8pt"> &nbsp; </font></font></p>
+				<p align="center" style="margin-left: 0.02in; margin-right: 0.02in; margin-top: 0.02in">
+				<font face="Arial, sans-serif"><font size="1" style="font-size: 8pt"> &nbsp; </font></font></p>
+			{% endif %}
+			
+		</td>
+		{% if x < 3 %}
+		<td rowspan="20" width="13" valign="top" style="border-top: 1.00pt solid #ffffff; border-bottom: 1.00pt solid #ffffff; border-left: none; border-right: none; padding: 0in">
+			<p class="western"><br/>
+
+			</p>
+		</td>
+		{% endif %}
+		{% endfor %}
+	</tr>
+	{% endfor %}
+</table>
+</body>
+</html>

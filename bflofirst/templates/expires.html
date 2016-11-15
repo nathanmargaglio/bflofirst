@@ -1,0 +1,148 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Expires</title>
+	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.5; width=device-width;">
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/tables.css')}}?v={{ range(100, 999) | random }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+<!-- AJAX Updates -->
+<script type=text/javascript>
+
+	$(function() {
+		$("input[name='result']").bind("click", function(){
+			$.get($SCRIPT_ROOT + "/_update", {
+				t: "result",
+				r: this.checked,
+				i: this.id
+			});
+		});
+	});
+	
+	$(function() {
+		$("input[name='notes']").keydown(function(e){
+			if (e.keyCode != 13){
+				this.style = "background-color: LightCoral";
+			}
+			if (e.keyCode == 13){
+				this.style = "background-color: YellowGreen";
+				$.get($SCRIPT_ROOT + "/_update", {
+					t: "notes",
+					r: this.value,
+					i: this.id
+				});
+			};
+		});
+	});
+	
+	window.onload = function(){
+		var a = document.getElementById("label_checks");
+		a.onclick = function(){
+			var ele = document.getElementsByName("label_check");
+			for (var i = 0; i < ele.length; i++){
+				if (ele[i].style.display == 'none'){
+					ele[i].style.display = '';
+				}else{
+					ele[i].style.display = 'none';
+				}
+			};
+			return false;
+		};
+	};
+</script>
+</head>
+
+<body>
+
+<div class="table-title">
+<h3>Expired Listings
+<img src="https://media.licdn.com/media/AAEAAQAAAAAAAAT3AAAAJGIxMTY0ODVmLTAwM2UtNDU3MC05NjBlLTNkYzhmNDVlYjliMg.png" 
+align="right" height=100px>
+<br>
+<sub> "Now with more AJAX!"</sub>
+</h3>
+</div>
+
+
+<table id="table" class="table-fill">
+	<thead>
+		<tr>
+			<th class="text-left">ML #</th>
+			<th class="text-left">St.</th>
+		    <th class="text-left">Address</th>
+		    <th class="text-left">City</th>
+		    <th class="text-left">Owner Name</th>
+		    <th class="text-left">Expire Date</th>
+		    <th class="text-left">Number</th>
+		    <th class="text-left">Checked</th>
+		    <th class="text-left">Notes</th>
+		    <th class="text-left" name="label_check" style="display:none">To Labels</th>
+	    </tr>
+    </thead>
+    
+    <tbody class="table-hover">
+    {% for i in entries %}
+    <tr>
+    	<td class="text-left">{{i['ML #']}}</td>
+    	<td class="text-left">{{i['St']}}</td>
+    	<td class="text-left">{{i['Address']}}</td>
+    	<td class="text-left">{{i['Town/City']}}</td>
+    	<td class="text-left">{{i['Owner 1 First Name'] + " " + i['Owner 1 Last Name']}}</td>
+    	<td class="text-left">{{i['Expiration Date']}}</td>
+    	<td class="text-left">{{i.owner.phone}}</td>
+    	
+    	<!-- Checked Status -->
+    	<td class="text-left">
+	    	{% if i.owner.checked_number %}
+	    		<input type="checkbox" id={{i.owner_id}} name="result" value=true checked>
+	    	{% else %}
+	    		<input type="checkbox" id={{i.owner_id}} name="result" value=true>
+	    	{% endif %}
+    	</td>
+    	
+    	<!-- Notes -->
+    	<td class="text-left">
+    		{% if i.notes != None %}
+	    		<input type="text" id={{i.id}} name="notes" value="{{i.notes}}">
+	    	{% else %}
+	    		<input type="text" id={{i.id}} name="notes" value="">
+	    	{% endif %}
+    	</td>
+    	
+    	<!-- Label Gen -->
+    	<td class="text-left" name="label_check" style="display:none">
+    		<input type="checkbox" id={{i.owner_id}} class="to_label" value={{i.id}}>
+    	</td>
+    	
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+<div class="table-title" align="center">
+	<span style="float:left;">
+	<a href="{{url_for('index')}}"> <i class="material-icons"><i class="material-icons">home</i></i> </a>
+	<a href="#" id="label_checks" hidden> Tag Labels... </a>
+	</span>
+	
+    <span align="center" style="display: inline-block; margin-top: 5px;">{{page}} / {{max_page}}</span>
+    	
+    <span style="float:right;">
+	{% if page > 0 %}
+	<a href="{{url_for('expires', page = page-1) + params}}"> <i class="material-icons"><i class="material-icons">arrow_back</i></i> </a>
+	{% endif %}
+	
+	{% if page < max_page %}
+	<a href="{{url_for('expires', page = page+1) + params}}"> <i class="material-icons"><i class="material-icons">arrow_forward</i></i> </a>
+	{% endif %}
+	</span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: blobstore
+Version: 0.1a2
+Summary: Generic, zerorpc-powered, blobs storage
+Home-page: http://github.com/rshk/blobstore
+Author: Samuele Santi
+Author-email: samuele@samuelesanti.com
+License: GNU General Public License v3 or later (GPLv3+)
+Description: Generic, zerorpc-powered, blobs storage
+Platform: UNKNOWN

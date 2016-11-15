@@ -1,0 +1,6 @@
+../shortuuid/__init__.py
+../shortuuid/__init__.pyc
+top_level.txt
+PKG-INFO
+SOURCES.txt
+dependency_links.txt

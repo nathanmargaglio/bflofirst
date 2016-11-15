@@ -1,0 +1,161 @@
+<html><head>
+        <title>Query Results</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        </script>
+        <!-- AJAX Updates -->
+        <script type="text/javascript">
+            $(function() {
+                      		$("input[name='result']").bind("click", function(){
+                      			$.get($SCRIPT_ROOT + "/_update", {
+                      				t: "result",
+                      				r: this.checked,
+                      				i: this.id
+                      			});
+                      		});
+                      	});
+                      	
+                      	$(function() {
+                      		$("input[name='notes']").keydown(function(e){
+                      			if (e.keyCode != 13){
+                      				this.style = "background-color: LightCoral";
+                      			}
+                      			if (e.keyCode == 13){
+                      				this.style = "background-color: YellowGreen";
+                      				$.get($SCRIPT_ROOT + "/_update", {
+                      					t: "notes",
+                      					r: this.value,
+                      					i: this.id
+                      				});
+                      			};
+                      		});
+                      	});
+                      	
+                      	window.onload = function(){
+                      		var a = document.getElementById("label_checks");
+                      		a.onclick = function(){
+                      			var ele = document.getElementsByName("label_check");
+                      			for (var i = 0; i < ele.length; i++){
+                      				if (ele[i].style.display == 'none'){
+                      					ele[i].style.display = '';
+                      				}else{
+                      					ele[i].style.display = 'none';
+                      				}
+                      			};
+                      			return false;
+                      		};
+                      	};
+        </script>
+        <!--{{sc}} <link href="{{url_for("static", filename="css/login_b.css"
+        )}}" rel="stylesheet" type="text/css">
+	{{ec}}-->
+        <link rel="stylesheet" href="../static/css/login_b.css">
+    </head><body>
+        <div class="cover">
+            <div class="background-image-fixed cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center userbox">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h1 class="text-primary logofont">
+                                        <b>Expired Listi</b>
+                                        <b>ngs</b>
+                                    </h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-hover table-striped userbox">
+                                        <thead>
+                                            <tr>
+                                                <th>ML #</th>
+                                                <th>St.</th>
+                                                <th>Address</th>
+                                                <th>City
+                                                    <br>
+                                                </th>
+                                                <th>Owner Name
+                                                    <br>
+                                                </th>
+                                                <th>Exp. Date
+                                                    <br>
+                                                </th>
+                                                <th>Phone
+                                                    <br>
+                                                </th>
+                                                <th>Checked
+                                                    <br>
+                                                </th>
+                                                <th>Notes
+                                                    <br>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- {% for i in entries %} -->
+                                            <tr>
+                                                <td class="text-left">{{i['ML #']}}</td>
+                                                <td class="text-left">{{i['St']}}</td>
+                                                <td class="text-left">{{i['Address']}}</td>
+                                                <td class="text-left">{{i['Town/City']}}</td>
+                                                <td class="text-left">{{i['Owner 1 First Name'] + " " + i['Owner 1 Last Name']}}</td>
+                                                <td class="text-left">{{i['Expiration Date']}}</td>
+                                                <td class="text-left">{{i.owner.phone}}</td>
+                                                <!-- Checked Status -->
+                                                <td class="text-left">{% if i.owner.checked_number %}
+                                                    <input type="checkbox" id="{{i.owner_id}}" name="result" value="true" checked="">{% else %}
+                                                    <input type="checkbox" id="{{i.owner_id}}" name="result" value="true">{% endif %}</td>
+                                                <!-- Notes -->
+                                                <td class="text-left">{% if i.notes != None %}
+                                                    <input type="text" id="{{i.id}}" name="notes" value="{{i.notes}}">{% else %}
+                                                    <input type="text" id="{{i.id}}" name="notes" value="">{% endif %}</td>
+                                                <!-- Label Gen -->
+                                                <td class="text-left" name="label_check" style="display:none">
+                                                    <input type="checkbox" id="{{i.owner_id}}" class="to_label" value="{{i.id}}">
+                                                </td>
+                                            </tr>
+                                            <!-- {% endfor %} -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="{{url_for('index')}}"><i class="fa fa-3x fa-fw fa-home"></i></a>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="pager">
+                                        <li>
+                                            <!--{{sc}} {% if page> 0 %} {{ec}}-->
+                                            <a href="{{url_for('expires', page = page-1) + params}}">←  Prev</a>
+                                            <!--{{sc}} {% endif %} {{ec}}-->
+                                        </li>
+                                        <li>
+                                            <!--{{sc}} {% if page < max_page %} {{ec}}-->
+                                            <a href="{{url_for('expires', page = page+1) + params}}">Next  →</a>
+                                            <!--{{sc}} {% endif %} {{ec}}-->
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+</body></html>

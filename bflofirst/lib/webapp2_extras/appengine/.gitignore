@@ -1,0 +1,4 @@
+/__init__.pyc
+/sessions_memcache.pyc
+/sessions_ndb.pyc
+/users.pyc

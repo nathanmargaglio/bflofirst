@@ -1,0 +1,12 @@
+README.rst
+setup.cfg
+setup.py
+blobstore/__init__.py
+blobstore/client.py
+blobstore/server.py
+blobstore.egg-info/PKG-INFO
+blobstore.egg-info/SOURCES.txt
+blobstore.egg-info/dependency_links.txt
+blobstore.egg-info/entry_points.txt
+blobstore.egg-info/requires.txt
+blobstore.egg-info/top_level.txt

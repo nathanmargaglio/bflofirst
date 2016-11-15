@@ -1,0 +1,14 @@
+../msgpack/_version.py
+../msgpack/exceptions.py
+../msgpack/__init__.py
+../msgpack/fallback.py
+../msgpack/_version.pyc
+../msgpack/exceptions.pyc
+../msgpack/__init__.pyc
+../msgpack/fallback.pyc
+../msgpack/_packer.so
+../msgpack/_unpacker.so
+top_level.txt
+PKG-INFO
+SOURCES.txt
+dependency_links.txt

@@ -1,0 +1,8 @@
+/__init__.pyc
+/test_atmos.pyc
+/test_azure_blobs.pyc
+/test_base.pyc
+/test_cloudfiles.pyc
+/test_google_storage.pyc
+/test_local.pyc
+/test_s3.pyc

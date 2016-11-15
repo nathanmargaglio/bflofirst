@@ -1,0 +1,5 @@
+shortuuid/__init__.py
+shortuuid.egg-info/PKG-INFO
+shortuuid.egg-info/SOURCES.txt
+shortuuid.egg-info/dependency_links.txt
+shortuuid.egg-info/top_level.txt

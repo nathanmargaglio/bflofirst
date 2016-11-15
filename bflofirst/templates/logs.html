@@ -1,0 +1,60 @@
+<html><head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        
+    <link rel="stylesheet" href="../static/css/login_b.css"></head><body>
+        <div class="cover">
+            <div class="cover-image" style="background-image : url('http://pingendo.github.io/pingendo-bootstrap/assets/blurry/800x600/14.jpg')"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-bordered table-condensed userbox">
+                                        <thead>
+                                            <tr>
+                                                <th>EMAIL</th>
+                                                <th>PAGE</th>
+                                                <th>DATETIME</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- {% for i in entries %} -->
+                                            <tr>
+                                                <td class="text-left">{{i.user}}</td>
+                                                <td class="text-left">{{i.info}}</td>
+                                                <td class="text-left">{{i.time}}</td>
+                                                <!-- Checked Status -->
+                                                <!-- Notes -->
+                                                <!-- Label Gen -->
+                                                <td class="text-left" name="label_check" style="display:none">
+                                                    <input type="checkbox" id="{{i.owner_id}}" class="to_label" value="{{i.id}}">
+                                                </td>
+                                            </tr>
+                                            <!-- {% endfor %} -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="{{url_for('index')}}"><i class="fa fa-3x fa-fw fa-home"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+</body></html>

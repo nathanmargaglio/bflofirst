@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Buffalo Data Server</title>
+	<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.5; width=device-width;">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+<!-- BOOTSTRAP -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- END BOOTSTRAP -->
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/tables.css')}}?v={{ range(100, 999) | random }}">
+<style>
+.panel
+{
+	display: table;
+	width: 100%;
+	height: 100%;
+	overflow:auto;
+}
+
+.panel .input_left
+{
+	float:left;
+	width:48%;
+}
+
+.panel .input_right
+{
+	float:left;
+	width:48%;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="table-title">
+	
+		<h3>Buffalo Data Server
+		<img src="https://media.licdn.com/media/AAEAAQAAAAAAAAT3AAAAJGIxMTY0ODVmLTAwM2UtNDU3MC05NjBlLTNkYzhmNDVlYjliMg.png" width=300px>
+		</h3>
+		
+	</div>
+</div>
+
+<div class="container">
+	
+	<div class="panel panel-primary">
+
+			<div class="input_left">
+				<form class="form-horizontal" action="{{url_for('expires')}}" method="get">
+					<br>
+					<div class="form-group">
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								<ul class=flashes>
+									{% for m in messages %}
+										<label class="control-label"> {{m}} </label>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						{% endwith %}
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="email">Locality:</label>
+		    			<div class="col-sm-10">
+							<select name="locality">
+								<option value="local"> Local Only </option>
+								<option value="standard"> Standard </option>
+							</select><br>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="email">Expired Listings Only:</label>
+						<div class="col-sm-10">
+							<input type="checkbox" name="expired" value="true" checked><br>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="email">Listings with Numbers:</label>
+						<div class="col-sm-10">
+							<input type="checkbox" name="phone" value="true" checked><br>
+						</div>
+					</div>
+					
+					<div class="form-group" align="center">
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			<div class="input_right">
+
+				<form class="form-horizontal" action="{{url_for('labels')}}" method="get">
+					<br>
+					<div class="form-group">
+						<label class="control-label col-sm-2">Index:</label>
+						<div class="col-sm-10">
+							<input type="text" name="start_index" value="0"><br>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2">Date Range:</label>
+						<div class="col-sm-10">
+							From (m-d-y): <input type="text" name="from" style="position:absolute; right: 0px;"><br><br>
+							To (m-d-y): <input type="text" name="to" style="position:absolute; right: 0px;"><br>
+						</div>
+					</div>
+					<br>
+					<div class="form-group" align="center">
+						<div class="col-sm-10">
+							<button type="submit" class="btn btn-primary">Labels</button>
+						</div>
+					</div>
+				</form>
+			</div>
+	</div>
+
+<div class="form-group" align="right">
+	<a class="btn btn-primary" href="{{url_for("logout")}}">Logout</a>
+</div>
+
+</div>
+</body>
+</html>

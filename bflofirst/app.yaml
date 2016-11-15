@@ -1,0 +1,20 @@
+application: bravofoxtrot-141119
+version: 2
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /.*
+  script: main.app
+
+libraries:
+- name: MySQLdb
+  version: "latest"
+- name: pycrypto
+  version: "latest"
+- name: ssl
+  version: latest  
+
+env_variables:
+    SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:margaglio22@/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb

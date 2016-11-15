@@ -1,0 +1,11 @@
+/__init__.pyc
+/base.pyc
+/char.pyc
+/constraint.pyc
+/error.pyc
+/namedtype.pyc
+/namedval.pyc
+/tag.pyc
+/tagmap.pyc
+/univ.pyc
+/useful.pyc

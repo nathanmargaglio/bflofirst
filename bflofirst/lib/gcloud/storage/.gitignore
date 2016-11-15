@@ -1,0 +1,15 @@
+/__init__.pyc
+/_helpers.pyc
+/acl.pyc
+/batch.pyc
+/blob.pyc
+/bucket.pyc
+/client.pyc
+/connection.pyc
+/test__helpers.pyc
+/test_acl.pyc
+/test_batch.pyc
+/test_blob.pyc
+/test_bucket.pyc
+/test_client.pyc
+/test_connection.pyc

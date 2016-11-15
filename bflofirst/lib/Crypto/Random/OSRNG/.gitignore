@@ -1,0 +1,5 @@
+/__init__.pyc
+/fallback.pyc
+/nt.pyc
+/posix.pyc
+/rng_base.pyc

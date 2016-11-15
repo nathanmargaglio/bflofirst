@@ -1,0 +1,7 @@
+/__init__.pyc
+/test_api_callable.pyc
+/test_auth.pyc
+/test_bundling.pyc
+/test_gax.pyc
+/test_grpc.pyc
+/test_path_template.pyc

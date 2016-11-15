@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <link type="text/css" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+        <link type="text/css" href="//code.cloudcms.com/alpaca/1.5.22/bootstrap/alpaca.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.0/handlebars.js"></script>
+        <script type="text/javascript" src="//code.cloudcms.com/alpaca/1.5.22/bootstrap/alpaca.min.js"></script>
+    	<script type=text/javascript>
+		  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+		</script>
+    </head>
+    <body>
+        <div id="form"></div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#form").alpaca({
+    "schema": {
+        "type": "object",
+        "required": false,
+        "properties": {
+            "local_choice": {
+                "readonly": false,
+                "default": "local",
+                "disallow": [],
+                "enum": [
+                    "local",
+                    "standard"
+                ],
+                "properties": {}
+            },
+            "phone_choice": {
+                "type": "boolean",
+                "required": false,
+                "default": true,
+                "properties": {}
+            },
+            "expires_choice": {
+                "type": "boolean",
+                "required": false,
+                "default": true,
+                "properties": {}
+            }
+        }
+    },
+    "options": {
+        "focus": false,
+        "type": "object",
+        "helpers": [],
+        "validate": true,
+        "disabled": false,
+        "showMessages": true,
+        "collapsible": false,
+        "legendStyle": "button",
+        "form": {
+        	"attributes": {
+	        	"action": $SCRIPT_ROOT + "/query_submission",
+	        	"method": "post"
+	        },
+            "buttons": {
+                "submit": {
+                    "click": function() {
+                        this.ajaxSubmit({success: function(data){
+                        				window.location = data['url']
+                        				}});
+                    }
+                }
+            }
+        },
+        "fields": {
+            "local_choice": {
+                "type": "select",
+                "label": "Location Style",
+                "helpers": [],
+                "validate": true,
+                "disabled": false,
+                "showMessages": true,
+                "renderButtons": true,
+                "useDataSourceAsEnum": true,
+                "multiselect": {
+                    "disableIfEmpty": true
+                },
+                "noneLabel": "None",
+                "hideNone": true,
+                "readonly": false,
+                "optionLabels": [
+                    "Local Counties Only",
+                    "Standard"
+                ],
+                "fields": {}
+            },
+            "phone_choice": {
+                "type": "checkbox",
+                "label": "Has Phone",
+                "helpers": [],
+                "validate": true,
+                "disabled": false,
+                "showMessages": true,
+                "renderButtons": true,
+                "rightLabel": "",
+                "fields": {}
+            },
+            "expires_choice": {
+                "type": "checkbox",
+                "label": "Expires Only",
+                "helpers": [],
+                "validate": true,
+                "disabled": false,
+                "showMessages": true,
+                "renderButtons": true,
+                "rightLabel": "",
+                "fields": {}
+            }
+        }
+    },
+    "data": {
+        "new1476990182070": "Local Counties Only",
+        "new1476990444150": true,
+        "new1476990476819": true
+    }
+});
+            });
+        </script>
+    </body>
+</html>

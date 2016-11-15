@@ -1,0 +1,10 @@
+/__init__.pyc
+/_helpers.pyc
+/_openssl_crypt.pyc
+/_pure_python_crypt.pyc
+/_pycrypto_crypt.pyc
+/client.pyc
+/clientsecrets.pyc
+/crypt.pyc
+/service_account.pyc
+/util.pyc

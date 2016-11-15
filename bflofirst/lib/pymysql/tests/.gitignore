@@ -1,0 +1,13 @@
+/__init__.pyc
+/base.pyc
+/test_DictCursor.pyc
+/test_SSCursor.pyc
+/test_basic.pyc
+/test_connection.pyc
+/test_converters.pyc
+/test_cursor.pyc
+/test_err.pyc
+/test_issues.pyc
+/test_load_local.pyc
+/test_nextset.pyc
+/test_optionfile.pyc

@@ -1,0 +1,10 @@
+/__init__.pyc
+/constant_names.pyc
+/garbage.pyc
+/interop.pyc
+/jsonapi.pyc
+/monitor.pyc
+/sixcerpt.pyc
+/strtypes.pyc
+/win32.pyc
+/z85.pyc

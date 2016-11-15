@@ -1,0 +1,346 @@
+1478629969733	geckodriver	INFO	Listening on 127.0.0.1:41613
+1478629970665	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.FZRmYGOK0FX1
+1478629970665	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478629970667	geckodriver::marionette	INFO	Connecting to Marionette on localhost:35190
+
+(firefox:19236): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478629972860	Marionette	INFO	Listening on port 35190
+1478629974660	Marionette	INFO	startBrowser db23ed02-15ee-4c0f-be54-797e7b0b9d89
+1478629983140	geckodriver	INFO	Listening on 127.0.0.1:54499
+1478629984078	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.CRpHuUzUoZPS
+1478629984079	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478629984093	geckodriver::marionette	INFO	Connecting to Marionette on localhost:33397
+
+(firefox:19331): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478629985449	Marionette	INFO	Listening on port 33397
+1478629987098	Marionette	INFO	startBrowser 63501ed7-d117-49b7-a889-df5709f79113
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:19331): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19331): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19331): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19331): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19331): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19331): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f083f537600' of type 'MaiAtkType119'
+1478630026552	geckodriver	INFO	Listening on 127.0.0.1:35423
+1478630027544	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.A6Z3SfzkMGi9
+1478630027545	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478630027564	geckodriver::marionette	INFO	Connecting to Marionette on localhost:39467
+
+(firefox:19483): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478630028926	Marionette	INFO	Listening on port 39467
+1478630030323	Marionette	INFO	startBrowser c3abd968-9681-43dc-8048-52c8ca77e15e
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:19483): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19483): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19483): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19483): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19483): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+1478630056528	geckodriver	INFO	Listening on 127.0.0.1:41307
+1478630057508	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.Dvc7srg1nR7g
+1478630057509	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478630057511	geckodriver::marionette	INFO	Connecting to Marionette on localhost:33384
+
+(firefox:19638): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478630058636	Marionette	INFO	Listening on port 33384
+1478630060569	Marionette	INFO	startBrowser bd6cdccb-52a9-4ff0-b855-bd37c8c39e92
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:19638): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19638): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19638): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19638): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19638): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+1478630111504	geckodriver	INFO	Listening on 127.0.0.1:54929
+1478630112487	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.TcuJxF5mr4Lv
+1478630112488	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478630112490	geckodriver::marionette	INFO	Connecting to Marionette on localhost:45263
+
+(firefox:19815): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478630113993	Marionette	INFO	Listening on port 45263
+1478630115883	Marionette	INFO	startBrowser f7df48a8-3770-4f16-ab67-6b4c025310dc
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:19815): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19815): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19815): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19815): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19815): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19815): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f0beab78380' of type 'MaiAtkType119'
+
+(firefox:19815): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f0beab786f0' of type 'MaiAtkType119'
+1478630158978	geckodriver	INFO	Listening on 127.0.0.1:48140
+1478630159973	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.0CdLLm9pA1TE
+1478630159974	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478630160016	geckodriver::marionette	INFO	Connecting to Marionette on localhost:36821
+
+(firefox:19969): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478630161161	Marionette	INFO	Listening on port 36821
+1478630162742	Marionette	INFO	startBrowser 23eb739a-c6fd-4728-9568-8d7c33689c6b
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:19969): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19969): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19969): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19969): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19969): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+1478630289860	geckodriver	INFO	Listening on 127.0.0.1:57237
+1478630290864	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.Y1xW8izBQMOb
+1478630290865	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478630290871	geckodriver::marionette	INFO	Connecting to Marionette on localhost:45839
+
+(firefox:20125): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478630292048	Marionette	INFO	Listening on port 45839
+1478630294092	Marionette	INFO	startBrowser 027159c4-6ada-4551-a811-52ed1b51842a
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:20125): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20125): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20125): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20125): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20125): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:19483): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'load_complete' is invalid for instance '0x7f9aba9e8790' of type 'MaiAtkType13b'
+
+(firefox:20125): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f4fc8d783d0' of type 'MaiAtkType119'
+1478630331599	geckodriver	INFO	Listening on 127.0.0.1:55671
+1478630332594	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.DCNLc5NXq2Eq
+1478630332595	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478630332600	geckodriver::marionette	INFO	Connecting to Marionette on localhost:35777
+
+(firefox:20270): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478630333748	Marionette	INFO	Listening on port 35777
+1478630335374	Marionette	INFO	startBrowser 4558ffc1-a044-43fb-97e4-54ed015536f8
+
+(firefox:19638): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'load_complete' is invalid for instance '0x7f1e214b5600' of type 'MaiAtkType13b'
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:20270): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20270): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20270): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20270): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20270): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+JavaScript error: https://cdn.clareitysecurity.net/js/jquery.min.js, line 2: NS_ERROR_NOT_INITIALIZED: 
+[Child 20336] WARNING: pipe error (3): Connection reset by peer: file /build/firefox-3wLmb4/firefox-49.0.2+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 316
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x4C0001,name=PCrashReporter::Msg_AnnotateCrashReport) Channel error: cannot send/recv
+
+Crash Annotation GraphicsCriticalError: |[C0][GFX1-]: Receive IPC close with reason=AbnormalShutdown (t=10.3869) 
+###!!! [Child][MessageChannel] Error: (msgtype=0x4600E3,name=PContent::Msg_GraphicsError) Channel error: cannot send/recv
+
+[GFX1-]: Receive IPC close with reason=AbnormalShutdown
+1478630374676	geckodriver	INFO	Listening on 127.0.0.1:53509
+1478630375678	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.w6FysBy0a9h8
+1478630375679	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478630375685	geckodriver::marionette	INFO	Connecting to Marionette on localhost:39358
+
+(firefox:20424): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478630376502	Marionette	INFO	Listening on port 39358
+1478630378368	Marionette	INFO	startBrowser cb0e9746-0057-414f-b2f1-1266c53db7d6
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:20424): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20424): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20424): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20424): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20424): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:20424): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f3555db1290' of type 'MaiAtkType119'
+
+(firefox:20424): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'load_complete' is invalid for instance '0x7f355da3d6f0' of type 'MaiAtkType13b'
+
+(firefox:20424): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f355da3dba0' of type 'MaiAtkType139'
+
+(firefox:20424): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f3555db1290' of type 'MaiAtkType119'
+
+(firefox:20424): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f355e92bf60' of type 'MaiAtkType119'
+
+(firefox:20424): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f355ea636a0' of type 'MaiAtkType119'
+
+(firefox:20424): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f355ea63bf0' of type 'MaiAtkType119'
+1478636178141	geckodriver	INFO	Listening on 127.0.0.1:56595
+1478636179139	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.p0aZd4GBgdxe
+1478636179140	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478636179144	geckodriver::marionette	INFO	Connecting to Marionette on localhost:34075
+
+(firefox:21392): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478636180240	Marionette	INFO	Listening on port 34075
+1478636181956	Marionette	INFO	startBrowser 842c8f74-6558-4c1f-84eb-7519332715f4
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:21392): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21392): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21392): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21392): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21392): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21392): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7fa927ef8600' of type 'MaiAtkType119'
+1478636285405	geckodriver	INFO	Listening on 127.0.0.1:50986
+1478636286388	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.XFSk4TW2SyYe
+1478636286389	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478636286390	geckodriver::marionette	INFO	Connecting to Marionette on localhost:42563
+
+(firefox:21605): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478636287516	Marionette	INFO	Listening on port 42563
+1478636289508	Marionette	INFO	startBrowser 5b6563e4-2e1a-43f5-8bda-edfecc35b19b
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:21605): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21605): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21605): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21605): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21605): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21605): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f11f1896a60' of type 'MaiAtkType119'
+
+(firefox:21605): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f11f1896f10' of type 'MaiAtkType119'
+1478636354760	geckodriver	INFO	Listening on 127.0.0.1:47229
+1478636355752	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.Au5UUBd7trJn
+1478636355753	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478636355757	geckodriver::marionette	INFO	Connecting to Marionette on localhost:35323
+
+(firefox:21788): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478636356857	Marionette	INFO	Listening on port 35323
+1478636358640	Marionette	INFO	startBrowser e225765c-583a-496c-9a1d-8750991dba2f
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:21788): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21788): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21788): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21788): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21788): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21788): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7fcef3bf5a60' of type 'MaiAtkType119'
+
+(firefox:21788): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7fcef3bf5c40' of type 'MaiAtkType119'
+1478636400343	geckodriver	INFO	Listening on 127.0.0.1:45778
+1478636401346	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.nNgmxgkEUCKu
+1478636401347	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478636401351	geckodriver::marionette	INFO	Connecting to Marionette on localhost:42726
+
+(firefox:21938): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478636402483	Marionette	INFO	Listening on port 42726
+1478636404075	Marionette	INFO	startBrowser 8105283d-2753-45ed-9b77-b0ffa50b4072
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:21938): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21938): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21938): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21938): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21938): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:21938): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f46f6e29c90' of type 'MaiAtkType119'
+1478636494303	geckodriver	INFO	Listening on 127.0.0.1:40416
+1478636495303	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.KPLbnrKnKwRZ
+1478636495303	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478636495304	geckodriver::marionette	INFO	Connecting to Marionette on localhost:36994
+
+(firefox:22087): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478636496032	Marionette	INFO	Listening on port 36994
+1478636497772	Marionette	INFO	startBrowser 7e262980-9433-4ca6-9705-0d396e63f450
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:22087): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22087): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22087): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22087): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22087): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22087): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f6434f38880' of type 'MaiAtkType119'
+1478636551579	geckodriver	INFO	Listening on 127.0.0.1:59740
+1478636552583	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.cMtDHHwj1nOh
+1478636552583	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478636552593	geckodriver::marionette	INFO	Connecting to Marionette on localhost:43054
+
+(firefox:22249): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478636553779	Marionette	INFO	Listening on port 43054
+1478636555438	Marionette	INFO	startBrowser a922053e-890e-4886-992e-6dea7bf69dbe
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:22249): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22249): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22249): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22249): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22249): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:22249): GLib-GObject-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./gobject/gsignal.c:3486: signal name 'selection_changed' is invalid for instance '0x7f81a58723d0' of type 'MaiAtkType119'
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 77: TypeError: this._recipeManager is null
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 77: TypeError: this._recipeManager is null
+1478874913420	geckodriver	INFO	Listening on 127.0.0.1:37312
+1478874914405	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.LeaCKa8xt4rT
+1478874914406	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox
+1478874914415	geckodriver::marionette	INFO	Connecting to Marionette on localhost:39369
+
+(firefox:17045): IBUS-WARNING **: The owner of /home/nathan/.config/ibus/bus is not root!
+1478874916105	Marionette	INFO	Listening on port 39369
+1478874918304	Marionette	INFO	startBrowser 32805ae0-485d-4c09-a837-69b74cd31909
+JavaScript error: https://idp.mynysmls.com/idp/Authn/UserPassword, line 1: ReferenceError: InitializeTimer is not defined
+
+(firefox:17045): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:17045): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:17045): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:17045): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed
+
+(firefox:17045): GLib-GObject-CRITICAL **: g_type_add_interface_static: assertion 'g_type_parent (interface_type) == G_TYPE_INTERFACE' failed

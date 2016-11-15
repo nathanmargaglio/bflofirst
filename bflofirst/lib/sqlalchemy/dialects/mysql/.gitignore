@@ -1,0 +1,10 @@
+/__init__.pyc
+/base.pyc
+/cymysql.pyc
+/gaerdbms.pyc
+/mysqlconnector.pyc
+/mysqldb.pyc
+/oursql.pyc
+/pymysql.pyc
+/pyodbc.pyc
+/zxjdbc.pyc

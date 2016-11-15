@@ -1,0 +1,13 @@
+/__init__.pyc
+/compression.pyc
+/connection.pyc
+/decorators.pyc
+/dist.pyc
+/files.pyc
+/iso8601.pyc
+/logging.pyc
+/misc.pyc
+/networking.pyc
+/publickey.pyc
+/py3.pyc
+/xml.pyc

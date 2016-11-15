@@ -1,0 +1,4 @@
+[console_scripts]
+blobstore_client = blobstore.client:main
+blobstore_server = blobstore.server:main
+

@@ -1,0 +1,128 @@
+<html><head>
+        <title>Buffalo Data Server</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!--{{sc}} <link href="{{url_for("static", filename="css/login_b.css"
+        )}}" rel="stylesheet" type="text/css">
+	{{ec}}-->
+        <link rel="stylesheet" href="../static/css/login_b.css">
+    </head><body>
+        <div class="cover">
+            <div class="background-image-fixed cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center userbox">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h2 class="text-left text-primary logofont">
+                                        <b>Buffalo Data Server</b>
+                                    </h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="text-left text-primary">{% with messages = get_flashed_messages() %} {% if messages %} {% for
+                                        m in messages %} {{m}} {% endfor %} {% endif %} {% endwith %}</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form class="form-horizontal" role="form" action="{{url_for('expires')}}" method="get">
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <label class="control-label">Locality</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" name="locality">
+                                                    <option value="local">Local Only</option>
+                                                    <option value="standard">Everything</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <div class="checkbox">
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" name="expired" value="true" checked="">Expired Only</label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" name="phone" value="true" checked="">Phone Only</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-default">Expires..
+                                                    <br>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <form class="form-horizontal" role="form" action="{{url_for('labels')}}" method="get">
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <label class="control-label">Index
+                                                    <br>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="start_index" value="0">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <label class="control-label">From</label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="from">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <label class="control-label">To
+                                                    <br>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="to">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-default">Labels...</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="btn btn-primary" href="{{url_for('logout')}}">Logout<br></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+</body></html>

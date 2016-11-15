@@ -1,0 +1,10 @@
+/__init__.pyc
+/brightbox.pyc
+/cloudstack.pyc
+/dimensiondata.pyc
+/elb.pyc
+/gce.pyc
+/gogrid.pyc
+/ninefold.pyc
+/rackspace.pyc
+/softlayer.pyc

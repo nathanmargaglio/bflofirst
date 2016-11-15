@@ -1,0 +1,6 @@
+/__init__.pyc
+/test_fallback.pyc
+/test_generic.pyc
+/test_nt.pyc
+/test_posix.pyc
+/test_winrandom.pyc

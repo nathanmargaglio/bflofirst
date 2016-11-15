@@ -1,0 +1,17 @@
+/__init__.pyc
+/batch.pyc
+/client.pyc
+/connection.pyc
+/entity.pyc
+/helpers.pyc
+/key.pyc
+/query.pyc
+/test_batch.pyc
+/test_client.pyc
+/test_connection.pyc
+/test_entity.pyc
+/test_helpers.pyc
+/test_key.pyc
+/test_query.pyc
+/test_transaction.pyc
+/transaction.pyc

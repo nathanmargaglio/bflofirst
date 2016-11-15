@@ -1,0 +1,10 @@
+/__init__.pyc
+/test_brightbox.pyc
+/test_cloudstack.pyc
+/test_dimensiondata.pyc
+/test_elb.pyc
+/test_gce.pyc
+/test_gogrid.pyc
+/test_ninefold.pyc
+/test_rackspace.pyc
+/test_softlayer.pyc

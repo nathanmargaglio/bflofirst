@@ -1,0 +1,16 @@
+/__init__.pyc
+/auth.pyc
+/config.pyc
+/i18n.pyc
+/jinja2.pyc
+/json.pyc
+/local.pyc
+/local_app.pyc
+/mako.pyc
+/routes.pyc
+/securecookie.pyc
+/security.pyc
+/sessions.pyc
+/sessions_memcache.pyc
+/sessions_ndb.pyc
+/users.pyc

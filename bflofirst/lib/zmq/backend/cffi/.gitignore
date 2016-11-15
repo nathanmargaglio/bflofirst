@@ -1,0 +1,10 @@
+/__init__.pyc
+/_cffi.pyc
+/_poll.pyc
+/constants.pyc
+/context.pyc
+/devices.pyc
+/error.pyc
+/message.pyc
+/socket.pyc
+/utils.pyc

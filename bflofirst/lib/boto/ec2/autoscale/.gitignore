@@ -1,0 +1,10 @@
+/__init__.pyc
+/activity.pyc
+/group.pyc
+/instance.pyc
+/launchconfig.pyc
+/limits.pyc
+/policy.pyc
+/request.pyc
+/scheduled.pyc
+/tag.pyc

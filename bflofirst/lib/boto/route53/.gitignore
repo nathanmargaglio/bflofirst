@@ -1,0 +1,8 @@
+/__init__.pyc
+/connection.pyc
+/exception.pyc
+/healthcheck.pyc
+/hostedzone.pyc
+/record.pyc
+/status.pyc
+/zone.pyc

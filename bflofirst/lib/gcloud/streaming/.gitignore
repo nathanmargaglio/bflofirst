@@ -1,0 +1,13 @@
+/__init__.pyc
+/buffered_stream.pyc
+/exceptions.pyc
+/http_wrapper.pyc
+/stream_slice.pyc
+/test_buffered_stream.pyc
+/test_exceptions.pyc
+/test_http_wrapper.pyc
+/test_stream_slice.pyc
+/test_transfer.pyc
+/test_util.pyc
+/transfer.pyc
+/util.pyc

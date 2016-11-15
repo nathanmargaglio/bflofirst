@@ -1,0 +1,16 @@
+/__init__.pyc
+/_dummy_thread.pyc
+/_markupbase.pyc
+/_thread.pyc
+/builtins.pyc
+/collections.pyc
+/configparser.pyc
+/copyreg.pyc
+/itertools.pyc
+/pickle.pyc
+/queue.pyc
+/reprlib.pyc
+/socketserver.pyc
+/subprocess.pyc
+/sys.pyc
+/winreg.pyc

@@ -1,0 +1,9 @@
+/__init__.pyc
+/batch.pyc
+/connection.pyc
+/pool.pyc
+/table.pyc
+/test_batch.pyc
+/test_connection.pyc
+/test_pool.pyc
+/test_table.pyc

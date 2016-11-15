@@ -1,0 +1,41 @@
+Metadata-Version: 1.1
+Name: Flask-Cloudy
+Version: 0.13.2
+Summary: Flask-Cloudy is a simple flask extension and standalone library to upload and save files on S3, Google storage or other Cloud Storages
+Home-page: https://github.com/mardix/flask-cloudy/
+Author: Mardix
+Author-email: mardix@github.com
+License: MIT
+Download-URL: http://github.com/mardix/flask-cloudy/tarball/master
+Description: 
+        Flask-Cloudy
+        
+        A wrapper around Apache-Libcloud to upload and save files on cloud storage
+        providers such as: AWS S3, Google Storage, Microsoft Azure, Rackspace Cloudfiles,
+        and even on local storage through a Flask application.
+        (It can be used as standalone)
+        
+        Supported storage:
+        
+        - AWS S3
+        - Google Storage
+        - Microsoft Azure
+        - Rackspace CloudFiles
+        - Local
+        
+        
+Keywords: flask,s3,aws,cloudfiles,storage,azure,google,cloudy
+Platform: any
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

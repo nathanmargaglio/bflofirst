@@ -1,0 +1,15 @@
+/__init__.pyc
+/_helpers.pyc
+/_testing.pyc
+/client.pyc
+/connection.pyc
+/credentials.pyc
+/environment_vars.pyc
+/exceptions.pyc
+/iterator.pyc
+/test__helpers.pyc
+/test_client.pyc
+/test_connection.pyc
+/test_credentials.pyc
+/test_exceptions.pyc
+/test_iterator.pyc
