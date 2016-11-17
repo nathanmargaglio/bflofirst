@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import crawler
 import pandas as pd
 import time, re, os, requests
+import datetime
 
 from models import Listing, User, Owner, Parcel, Log
 
@@ -66,7 +67,7 @@ def _create_database():
     
 def remove_duplicates():
     print("Removing duplicates...")
-    ls = db.session.query(Listing).filter(Listing.status == 'X').all()
+    ls = db.session.query(Listing).filter(Listing.status == 'X').filter(Listing.exp_date >= datetime.datetime.now().date() - datetime.timedelta(days=2)).all()
     for n,l in enumerate(ls):
         fl = db.session.query(Listing).filter(Listing.ml == l.ml).all()
         if len(fl) > 1:
