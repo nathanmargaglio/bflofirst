@@ -20,9 +20,6 @@ def crawler(date="today"):
 	chromeOptions.add_experimental_option("prefs",prefs)
 	chromedriver = './chromedriver'
 	driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
-	
-	#driver = webdriver.PhantomJS()
-	#driver = webdriver.Firefox(executable_path='./geckodriver')
 
 	driver.get("https://idp.mynysmls.com/idp/Authn/UserPassword")
 	driver.find_element_by_css_selector("a[onclick*='buffalo']").click()
@@ -58,7 +55,7 @@ def crawler(date="today"):
 		time.sleep(2)
 		driver.find_element_by_css_selector("a[id*='m_ucSearchButtons_m_lbSearch']").click()
 
-	#time.sleep(2)
+	time.sleep(2)
 	#driver.find_element_by_css_selector("a[id*='m_lnkCheckAllLink']").click()
 
 	time.sleep(2)

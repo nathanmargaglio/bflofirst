@@ -8,11 +8,8 @@ from flask_wtf import Form
 from flask_wtf.file import FileField
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-from models import Owner, Listing, Parcel, User, Log, db
-import time
-import random
-import zipfile
-from io import BytesIO
+from models import Owner, Listing, Parcel, User, Log, db, FacebookLead
+import csv
 import os
 from config import local_cities, admins, example_streets
 import datetime
@@ -63,6 +60,81 @@ def after_request(r):
 def index():
     flash("You are logged in as {}".format(current_user.email))
     return render_template("index_b.html")
+
+@app.route('/upload', methods=['GET','POST'])
+@login_required
+def upload():
+    if request.method == "GET":
+        ret = """
+        <html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css">
+    <link href="../static/css/login_b.css" rel="stylesheet" type="text/css">
+    <!--
+    <link href="{{url_for("static", filename="css/login_b.css
+    " )}} rel="stylesheet" type="text/css">
+    -->
+  </head>
+  
+  <body>
+    <div class="cover">
+      <div class="cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center userbox">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                
+                <form action="upload" method=post enctype=multipart/form-data> 
+                    <input type='file' name='file'> 
+                    <input type='submit' value="Upload and Process Selected File"> 
+                </form>
+                
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </body>
+        """
+        return ret
+    
+    if request.method == "POST":
+        if 'file' not in request.files:
+            return "Error: No file?"
+        file = request.files['file']
+        if file.filename == '':
+            return "Error: No file?"
+        
+        csv_file = csv.reader(file)
+        ret = ""
+        for row in csv_file:
+            if row[0] == "id":
+                continue
+            lead = FacebookLead()
+            lead.fromRow(row)
+            db.session.add(lead)
+            db.session.commit()
+        
+        ls = db.session.query(FacebookLead).filter(Listing.exp_date >= datetime.datetime.now().date() - datetime.timedelta(days=2)).all()
+        print len(ls)
+        for l in ls:
+            fl = db.session.query(FacebookLead).filter(FacebookLead.fb_id == l.fb_id).all()
+            if len(fl) > 1:
+                for i in fl[1:]:
+                    db.session.delete(i)
+                db.session.commit()
+        return redirect(url_for('facebook'))
 
 @app.route('/labels', methods=['GET', 'POST'])
 def labels():
@@ -216,6 +288,20 @@ def _update():
     
     return jsonify(res = "success")
 
+@app.route('/_fbupdate')
+def _fbupdate():
+    t = request.args.get('t')
+    r = request.args.get('r')
+    i = request.args.get('i')
+
+    if t == "notes":
+        listing = FacebookLead.query.filter(FacebookLead.id == i).first()
+        listing.notes = r
+        db.session.add(listing)
+        db.session.commit()
+    
+    return jsonify(res = "success")
+
 @login_manager.unauthorized_handler
 def unauthorized():
     return redirect(url_for("login"))
@@ -225,6 +311,17 @@ def unauthorized():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/facebook', methods=["GET","POST"])
+@login_required
+def facebook():
+    page = request.args.get('page')
+    if not page:
+        page = 0
+    
+    entry_list = FacebookLead.query.order_by(FacebookLead.date_added.desc()).all()
+    return render_template("results_fb.html", page=int(page), max_page=int(len(entry_list)/25.), entries=entry_list[25*int(page):25*(int(page)+1)])
+    
 
 @app.route('/expires', methods=["GET", "POST"])
 @login_required

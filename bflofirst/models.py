@@ -4,7 +4,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 import string
 
-db = SQLAlchemy()
+if __name__ == "__main__":
+    from flask_script import Manager
+    from flask_migrate import Migrate, MigrateCommand
+    # Run these commands in order 
+    # sudo python models.py db migrate
+    # sudo python models.py db upgrade
+    app = Flask(__name__)
+    db = SQLAlchemy(app)
+    db.init_app(app)
+    
+    app.config['SECRET_KEY'] = "secret"
+    app.config['SERVER_NAME'] = 'localhost:8080'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3307/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
+    
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = False
+else:
+    db = SQLAlchemy()
 
 class Parcel(db.Model):
     # Parcel information obtainable via Erie County Parcel Search
@@ -258,6 +275,50 @@ class User(db.Model):
     def is_anonymous(self):
         """False, as anonymous users aren't supported."""
         return False
+    
+class FacebookLead(db.Model):
+    __tablename__="facebook_lead"
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    notes = db.Column(db.String(512), nullable=True)
+    date_added = db.Column(db.Date)
+    
+    #From CSV v
+    fb_id = db.Column(db.String(128), nullable=True)
+    created_time = db.Column(db.String(128), nullable=True)
+    ad_id = db.Column(db.String(128), nullable=True)
+    ad_name = db.Column(db.String(128), nullable=True)
+    adset_id = db.Column(db.String(128), nullable=True)
+    adset_name = db.Column(db.String(128), nullable=True)
+    campaign_id = db.Column(db.String(128), nullable=True)
+    campaign_name = db.Column(db.String(128), nullable=True)
+    form_id = db.Column(db.String(128), nullable=True)
+    is_organic = db.Column(db.String(128), nullable=True)
+    
+    full_name = db.Column(db.String(128), nullable=True)
+    email = db.Column(db.String(128), nullable=True)
+    street_address = db.Column(db.String(128), nullable=True)
+    zip_code = db.Column(db.String(128), nullable=True)
+    phone_number = db.Column(db.String(128), nullable=True)
+    
+    def fromRow(self, row):
+        # inputs data from structured CSV row (i.e., a list)
+        self.fb_id = row[0]
+        self.created_time = row[1]
+        self.ad_id = row[2]
+        self.ad_name = row[3]
+        self.adset_id = row[4]
+        self.adset_name = row[5]
+        self.campaign_id = row[6]
+        self.campaign_name = row[7]
+        self.form_id = row[8]
+        self.is_organic = row[9]
+        
+        self.full_name = row[10]
+        self.email = row[11]
+        self.street_address = row[12]
+        self.zip_code = row[13]
+        self.phone_number = row[14]
+    
 
 class Log(db.Model):
     __tablename__ = "log"
@@ -265,24 +326,8 @@ class Log(db.Model):
     time = db.Column(db.DateTime)
     user = db.Column(db.String(128), db.ForeignKey('users.email'))
     info = db.Column(db.String(512))
-
-if __name__ == "__main__":
-    from flask_script import Manager
-    from flask_migrate import Migrate, MigrateCommand
-    # Run these commands in order 
-    # sudo python models.py db migrate
-    # sudo python models.py db upgrade
-    #app = Flask(__name__)
-    #db = SQLAlchemy(app)
-    #db.init_app(app)
     
-    app.config['SECRET_KEY'] = "secret"
-    app.config['SERVER_NAME'] = 'localhost:8080'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3307/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
-    
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = False
-    
+if __name__=="__main__":
     migrate = Migrate(app, db)
     manager = Manager(app)
     
