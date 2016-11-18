@@ -65,4 +65,5 @@ if __name__ == "__main__":
                 break
             except:
                 print "Failure: " + str(i)
+                time.sleep(10)
             data.close()
