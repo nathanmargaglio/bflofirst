@@ -319,6 +319,50 @@ class FacebookLead(db.Model):
         self.zip_code = row[13]
         self.phone_number = row[14]
     
+class Property(db.Model):
+    __tablename__ = "properties"
+    id = db.Column(db.Integer, autoincrement=True,primary_key=True)
+    key = db.Column(db.String(128), nullable=True)
+    
+    # Parcel Page
+    parcel_status = db.Column(db.String(128), nullable=True)
+    city = db.Column(db.String(128), nullable=True)
+    village = db.Column(db.String(128), nullable=True)
+    sbl = db.Column(db.String(128), nullable=True)
+    owner = db.Column(db.String(128), nullable=True)
+    swis = db.Column(db.String(128), nullable=True)
+    property_location = db.Column(db.String(128), nullable=True)
+    mailing = db.Column(db.String(128), nullable=True)
+    property_class = db.Column(db.String(128), nullable=True)
+    line2 = db.Column(db.String(128), nullable=True)
+    assessment = db.Column(db.String(128), nullable=True)
+    line3 = db.Column(db.String(128), nullable=True)
+    taxable = db.Column(db.String(128), nullable=True)
+    street = db.Column(db.String(128), nullable=True)
+    desc = db.Column(db.String(128), nullable=True)
+    owner_city = db.Column(db.String(128), nullable=True)
+    desc_alt = db.Column(db.String(128), nullable=True)
+    zip = db.Column(db.String(128), nullable=True)
+    dead_book = db.Column(db.String(128), nullable=True)
+    deed_page = db.Column(db.String(128), nullable=True)
+    frontage = db.Column(db.String(128), nullable=True)
+    depth = db.Column(db.String(128), nullable=True)
+    acres = db.Column(db.String(128), nullable=True)
+    year_built = db.Column(db.String(128), nullable=True)
+    square_ft = db.Column(db.String(128), nullable=True)
+    beds = db.Column(db.String(128), nullable=True)
+    baths = db.Column(db.String(128), nullable=True)
+    fireplace = db.Column(db.String(128), nullable=True)
+    school = db.Column(db.String(128), nullable=True)
+    
+class OwnerHistory(db.Model):
+    __tablename__ = "owner_histories"
+    id = db.Column(db.Integer, autoincrement=True,primary_key=True)
+    key = db.Column(db.String(128), nullable=True)
+    owner = db.Column(db.String(128), nullable=True)
+    book_date = db.Column(db.String(128), nullable=True)
+    date = db.Column(db.Date, nullable=True)
+    
 
 class Log(db.Model):
     __tablename__ = "log"

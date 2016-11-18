@@ -1,23 +1,68 @@
-import requests
-s = requests.Session()
-s.cookies['nyssplash'] = 'buffalo'
-s.cookies['test'] = 'test'
-s.cookies['_gat'] = '1'
-s.cookies['_ga'] = 'GA1.2.1065857682.1478637792'
-s.cookies['_gat_newTracker'] = '1'
-s.cookies['_idp_authn_lc_key']='6301ae5a5ac7ff909b52ad8bf50326a84ed4618015c9a248403c907d1467f70e'
-s.cookies['clareitysecurity']='ca5cb009f1f6ea65880bbf6b3d12cf8f71d6ced1'
-s.cookies['clareitysecurity']='ca4201a04a2e97ca55e14fb9c0bdd9fc7d5d6f6e'
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time, os, re
 
-s.get("https://idp.mynysmls.com/idp/Authn/UserPassword").text
-print s.cookies
-r = s.post("https://idp.mynysmls.com/idp/Authn/UserPassword", 
-                  data={'j_username': 'smithray', 'password': 'queen2016', 'j_password': 'queen2016', 'j_logintype': 'sso'})
+from pyvirtualdisplay import Display
+from lxml.html import InputElement
+display = Display(visible=0, size=(1024, 768))
 
-r = s.post("https://idp.mynysmls.com/idp/profile/SAML2/POST/SSO", data={"SAMLRequest":"PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c2FtbDJwOkF1dGhuUmVxdWVzdCB4bWxuczpzYW1sMnA9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpwcm90b2NvbCIgQXNzZXJ0aW9uQ29uc3VtZXJTZXJ2aWNlVVJMPSJodHRwczovL3BvcnRhbC5teW55c21scy5jb20vc2FtbCIgRGVzdGluYXRpb249Imh0dHBzOi8vaWRwLm15bnlzbWxzLmNvbTo0NDMvaWRwL3Byb2ZpbGUvU0FNTDIvUE9TVC9TU08iIElEPSJfNjU2YTJjZjYtYzc0ZC00ZjY3LWI3ZWYtMmE5ZWE0ZTFhNzkzIiBJc3N1ZUluc3RhbnQ9IjIwMTYtMTEtMDhUMjA6NDk6NDEuODg3WiIgUHJvdG9jb2xCaW5kaW5nPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YmluZGluZ3M6SFRUUC1QT1NUIiBWZXJzaW9uPSIyLjAiPjxzYW1sMjpJc3N1ZXIgeG1sbnM6c2FtbDI9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphc3NlcnRpb24iPmh0dHBzOi8vcG9ydGFsLm15bnlzbWxzLmNvbS9zYW1sL3NwPC9zYW1sMjpJc3N1ZXI+PG1kOkV4dGVuc2lvbnMgeG1sbnM6bWQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDptZXRhZGF0YSI+PHRocnB0eTpSZXNwb25kVG8geG1sbnM6dGhycHR5PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDpwcm90b2NvbDpleHQ6dGhpcmQtcGFydHkiPmh0dHBzOi8vcG9ydGFsLm15bnlzbWxzLmNvbS9zYW1sPC90aHJwdHk6UmVzcG9uZFRvPjwvbWQ6RXh0ZW5zaW9ucz48c2FtbDJwOk5hbWVJRFBvbGljeSBBbGxvd0NyZWF0ZT0idHJ1ZSIvPjwvc2FtbDJwOkF1dGhuUmVxdWVzdD4=",
-                                                                        "RelayState":"cG9ydGFs"})
+def headless():
+    display.start()
+    
+def start_driver():
+    headless()
+    chromeOptions = webdriver.ChromeOptions()
+    prefs = {"download.default_directory" : "./"}
+    chromeOptions.add_experimental_option("prefs",prefs)
+    chromedriver = './chromedriver'
+    driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
+    return driver
 
-#r = s.post("https://portal.mynysmls.com/saml", data={"SAMLRequest":"PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c2FtbDJwOkF1dGhuUmVxdWVzdCB4bWxuczpzYW1sMnA9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpwcm90b2NvbCIgQXNzZXJ0aW9uQ29uc3VtZXJTZXJ2aWNlVVJMPSJodHRwczovL3BvcnRhbC5teW55c21scy5jb20vc2FtbCIgRGVzdGluYXRpb249Imh0dHBzOi8vaWRwLm15bnlzbWxzLmNvbTo0NDMvaWRwL3Byb2ZpbGUvU0FNTDIvUE9TVC9TU08iIElEPSJfNjU2YTJjZjYtYzc0ZC00ZjY3LWI3ZWYtMmE5ZWE0ZTFhNzkzIiBJc3N1ZUluc3RhbnQ9IjIwMTYtMTEtMDhUMjA6NDk6NDEuODg3WiIgUHJvdG9jb2xCaW5kaW5nPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YmluZGluZ3M6SFRUUC1QT1NUIiBWZXJzaW9uPSIyLjAiPjxzYW1sMjpJc3N1ZXIgeG1sbnM6c2FtbDI9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphc3NlcnRpb24iPmh0dHBzOi8vcG9ydGFsLm15bnlzbWxzLmNvbS9zYW1sL3NwPC9zYW1sMjpJc3N1ZXI+PG1kOkV4dGVuc2lvbnMgeG1sbnM6bWQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDptZXRhZGF0YSI+PHRocnB0eTpSZXNwb25kVG8geG1sbnM6dGhycHR5PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDpwcm90b2NvbDpleHQ6dGhpcmQtcGFydHkiPmh0dHBzOi8vcG9ydGFsLm15bnlzbWxzLmNvbS9zYW1sPC90aHJwdHk6UmVzcG9uZFRvPjwvbWQ6RXh0ZW5zaW9ucz48c2FtbDJwOk5hbWVJRFBvbGljeSBBbGxvd0NyZWF0ZT0idHJ1ZSIvPjwvc2FtbDJwOkF1dGhuUmVxdWVzdD4=",
-#                                                                        "RelayState":"cG9ydGFs"})
-print(r.status_code, r.reason)
-print r.text
+def parcel_crawler(driver, sbl):
+    #Take us to main search page, searches for sbl
+    driver.get("https://paytax.erie.gov/webprop/index.asp")
+    driver.find_element_by_name('txtsbl').send_keys(str(sbl)+'.\n')
+    overflow = 0
+    log = ""
+    while overflow < 1000:
+        overflow += 1
+        links = driver.find_elements_by_tag_name('a')
+        l = None
+        for l in links:
+            try:
+                link = l.get_attribute('href')
+                if 'KEY' in link:
+                    sbl = re.findall('sbl=(.*)&', link)[0]
+                    key = re.findall('KEY=(.*)', link)[0]
+                    log += sbl + "," + key + '\n'
+            except:
+                pass
+        if driver.find_elements_by_tag_name('p')[0].text == '**** Last Record Found ****':
+            break
+        else:
+            if l != None:
+                l.click()
+            else:
+                break
+    return log
+            
+if __name__ == "__main__":
+    try:
+        tmp = open('parcel_links.csv')
+        tmp.close()
+    except:
+        tmp = open('parcel_links.csv','w')
+        tmp.close()
+    driver = start_driver()
+    for i in range(1000):
+        while True:
+            print "Attempting: " + str(i)
+            data = open('parcel_links.csv','a')
+            try:
+                res = parcel_crawler(driver, i)
+                data.write(res)
+                print "Success.\n"
+                break
+            except:
+                print "Failure: " + str(i)
+            data.close()
