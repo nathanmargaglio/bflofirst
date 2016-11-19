@@ -53,8 +53,9 @@ if __name__ == "__main__":
     except:
         tmp = open('parcel_links.csv','w')
         tmp.close()
+    wait_time = 10.
     driver = start_driver()
-    for i in range(1000):
+    for i in range(90,1000):
         while True:
             print "Attempting: " + str(i)
             data = open('parcel_links.csv','a')
@@ -62,8 +63,14 @@ if __name__ == "__main__":
                 res = parcel_crawler(driver, i)
                 data.write(res)
                 print "Success.\n"
+                if wait_time > 10:
+                    wait_time /= 2
                 break
             except:
                 print "Failure: " + str(i)
-                time.sleep(10)
+                #time.sleep(wait_time)
+                if wait_time < 600:
+                    wait_time *= 2
+                print "Current Wait Time: " + str(wait_time)
+                time.sleep(wait_time)
             data.close()
