@@ -1,0 +1,149 @@
+<html>
+  
+  <head>
+    <title>Query Results</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <!-- AJAX Updates -->
+    <script type="text/javascript">
+      $(function() {
+                              		$("input[name='result']").bind("click", function(){
+                              			$.get($SCRIPT_ROOT + "/_fbupdate", {
+                              				t: "result",
+                              				r: this.checked,
+                              				i: this.id
+                              			});
+                              		});
+                              	});
+                              	
+                              	$(function() {
+                              		$("input[name='notes']").keydown(function(e){
+                              			if (e.keyCode != 13){
+                              				this.style = "background-color: LightCoral";
+                              			}
+                              			if (e.keyCode == 13){
+                              				this.style = "background-color: YellowGreen";
+                              				$.get($SCRIPT_ROOT + "/_fbupdate", {
+                              					t: "notes",
+                              					r: this.value,
+                              					i: this.id
+                              				});
+                              			};
+                              		});
+                              	});
+                              	
+                              	window.onload = function(){
+                              		var a = document.getElementById("label_checks");
+                              		a.onclick = function(){
+                              			var ele = document.getElementsByName("label_check");
+                              			for (var i = 0; i < ele.length; i++){
+                              				if (ele[i].style.display == 'none'){
+                              					ele[i].style.display = '';
+                              				}else{
+                              					ele[i].style.display = 'none';
+                              				}
+                              			};
+                              			return false;
+                              		};
+                              	};
+    </script>
+    <!--{{sc}} <link href="{{url_for("static", filename="css/login_b.css"
+    )}}" rel="stylesheet" type="text/css">
+	{{ec}}-->
+    <link rel="stylesheet" href="../static/css/login_b.css">
+  </head>
+  
+  <body>
+    <div class="cover">
+      <div class="background-image-fixed cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center userbox">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <h1 class="text-primary logofont">
+                    <b>Facebook Leads</b>
+                    <br>
+                  </h1>
+                </div>
+                <div class="col-md-6">
+                  <hr>
+                  <form action="upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <input type="submit" value="Upload and Process Data">
+                  </form>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table table-bordered table-hover table-striped userbox">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Zip Code</th>
+                        <th>Phone</th>
+                        <th>Notes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- {% for i in entries %} -->
+                      <tr>
+                        <td class="text-left">{{i.full_name}}</td>
+                        <td class="text-left">{{i.email}}</td>
+                        <td class="text-left">{{i.street_address}}</td>
+                        <td class="text-left">{{i.zip_code}}</td>
+                        <td class="text-left">{{i.phone_number}}</td>
+                        <!-- Notes -->
+                        <td class="text-left">{% if i.notes != None %}
+                          <input type="text" id="{{i.id}}" name="notes"
+                          value="{{i.notes}}">{% else %}
+                          <input type="text" id="{{i.id}}" name="notes" value="">{% endif %}</td>
+                      </tr>
+                      <!-- {% endfor %} -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <hr>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <a href="{{url_for('index')}}"><i class="fa fa-3x fa-fw fa-home"></i></a>
+                </div>
+                <div class="col-md-6">
+                  <ul class="pager">
+                    <li>
+                      <!--{{sc}} {% if page> 0 %} {{ec}}-->
+                      <a href="{{url_for('expires', page = page-1) + params}}">←  Prev</a>
+                      <!--{{sc}} {% endif %} {{ec}}-->
+                    </li>
+                    <li>
+                      <!--{{sc}} {% if page < max_page %} {{ec}}-->
+                      <a href="{{url_for('expires', page = page+1) + params}}">Next  →</a>
+                      <!--{{sc}} {% endif %} {{ec}}-->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

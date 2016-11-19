@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time, os, re
+from email_logger import send_log
 
 from pyvirtualdisplay import Display
 from lxml.html import InputElement
@@ -26,6 +27,8 @@ def parcel_crawler(driver, sbl):
     log = ""
     while overflow < 1000:
         overflow += 1
+        time.sleep(1)
+        driver.save_screenshot('log.png')
         links = driver.find_elements_by_tag_name('a')
         l = None
         for l in links:
@@ -68,6 +71,8 @@ if __name__ == "__main__":
                 break
             except:
                 print "Failure: " + str(i)
+                print "Sending Log to nathanmargaglio@gmail.com"
+                send_log()
                 #time.sleep(wait_time)
                 if wait_time < 600:
                     wait_time *= 2
