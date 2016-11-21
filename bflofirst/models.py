@@ -328,9 +328,11 @@ class Property(db.Model):
     parcel_status = db.Column(db.String(128), nullable=True)
     city = db.Column(db.String(128), nullable=True)
     village = db.Column(db.String(128), nullable=True)
+    
     sbl = db.Column(db.String(128), nullable=True)
     owner = db.Column(db.String(128), nullable=True)
     swis = db.Column(db.String(128), nullable=True)
+    
     property_location = db.Column(db.String(128), nullable=True)
     mailing = db.Column(db.String(128), nullable=True)
     property_class = db.Column(db.String(128), nullable=True)

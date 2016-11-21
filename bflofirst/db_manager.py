@@ -31,23 +31,27 @@ def _list_tables():
             print t
 
 def _add_data():
-    crawler.crawler()
+    #crawler.crawler()
     data = pd.read_csv("full_data.csv")
     print "New Entries: ", len(data)
+    added_count = 0
     for row in data.iterrows():
         print row[0]
         row[1][pd.isnull(row[1])]=None
         p = Listing()
         #try:
         p.addViaRow(row[1])
-        db.session.add(p)
-        db.session.commit()
+        if not db.session.query(Listing).filter(Listing.ml == p.ml).count():
+            added_count += 1
+            db.session.add(p)
+            db.session.commit()
         #except:
         #    print("An error occurred: ")
         #    for j in row[1]:
         #        print(j)
         #    print
     os.remove("full_data.csv")
+    print "Added " + str(added_count) + " new entries."
             
 def register(email, password):
     with app.app_context():
@@ -130,5 +134,4 @@ if __name__ == '__main__':
     with app.app_context():
         _add_data()
         getNumbers()
-        remove_duplicates()
     print "Done!"
