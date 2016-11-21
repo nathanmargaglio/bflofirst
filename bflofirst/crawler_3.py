@@ -117,4 +117,4 @@ def crawl_parcels(start=0, end=-1):
     print "Time: " + str(time.time() - t0)
     
 if __name__ == "__main__":
-    crawl_parcels(0,5)
+    crawl_parcels()
