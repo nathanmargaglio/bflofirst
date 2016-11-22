@@ -90,26 +90,24 @@ def crawl_parcels(start=0, end=-1):
         if not db.session.query(Property).filter(Property.key == p.key).count():
             db.session.add(p)
             db.session.commit()
-            print "Added:  " + str(n) + ", " + str(n/total_length)
+            print "Added:  " + str(n+start) + ", " + str(n/total_length)
         else:
-            print "Failed: " + str(n) + ", " + str(n/total_length)
+            print "Failed: " + str(n+start) + ", " + str(n/total_length)
         
     print "Time: " + str(time.time() - t0)
     
 if __name__ == "__main__":
     user = raw_input("> ")
     for i in [0]:
-        arg = int(user)
-        slct = {        0:[64527, 129054],
+        try:
+            arg = int(user)
+        except:
+            arg = '-'
+        slct = {        '-':[0,-1],
+                        0:[64527, 129054],
                         1:[129054, 193581],
                         2:[193581, 258108],
                         3:[258108, -1]
                         }
         crawl_parcels(slct[arg][0], slct[arg][1])
-    try:
-        pass
-    except:
-        print "This will run all records. Are you sure?"
-        raw_input()
-        crawl_parcels()
     print "Done!"
