@@ -56,9 +56,6 @@ def crawl_parcels(start=0, end=-1):
     t0 = time.time()
     total_length = float(len(parcels[start:end]))
     
-    if end > total_length:
-        end = total_length
-    
     for n,r in enumerate(parcels[start:end]):
         p = Property()
         p.key = r[1]
@@ -117,4 +114,19 @@ def crawl_parcels(start=0, end=-1):
     print "Time: " + str(time.time() - t0)
     
 if __name__ == "__main__":
-    crawl_parcels()
+    user = raw_input("> ")
+    for i in [0]:
+        arg = int(user)
+        slct = {        0:[64527, 129054],
+                        1:[129054, 193581],
+                        2:[193581, 258108],
+                        3:[258108, -1]
+                        }
+        crawl_parcels(slct[arg][0], slct[arg][1])
+    try:
+        pass
+    except:
+        print "This will run all records. Are you sure?"
+        raw_input()
+        crawl_parcels()
+    print "Done!"
