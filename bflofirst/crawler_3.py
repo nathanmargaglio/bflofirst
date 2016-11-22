@@ -11,23 +11,6 @@ from models import Property
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from pyvirtualdisplay import Display
-from lxml.html import InputElement
-from crawler_2 import parcel_crawler
-display = Display(visible=0, size=(1024, 768))
-
-def headless():
-    display.start()
-    
-def start_driver():
-    headless()
-    chromeOptions = webdriver.ChromeOptions()
-    prefs = {"download.default_directory" : "./"}
-    chromeOptions.add_experimental_option("prefs",prefs)
-    chromedriver = './chromedriver'
-    driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=chromeOptions)
-    return driver
-
 def init_app(app):
     db = SQLAlchemy(app)
     db.init_app(app)
