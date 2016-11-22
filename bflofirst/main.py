@@ -8,7 +8,7 @@ from flask_wtf import Form
 from flask_wtf.file import FileField
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-from models import Owner, Listing, Parcel, User, Log, db, FacebookLead
+from models import Owner, Listing, Parcel, User, Log, db, FacebookLead, Property
 import csv
 import os
 from config import local_cities, admins, example_streets
@@ -60,6 +60,16 @@ def after_request(r):
 def index():
     flash("You are logged in as {}".format(current_user.email))
     return render_template("index_b.html")
+
+@app.route('/tax_records', methods=['GET','POST'])
+def tax_records():
+    res = db.session.query(Property).all()
+    disp = ""
+    for n,r in enumerate(res):
+        disp += r.zip + ", " + r.owner + "<br>\n"
+        if n == 25:
+            break
+    return disp
 
 @app.route('/upload', methods=['GET','POST'])
 @login_required
