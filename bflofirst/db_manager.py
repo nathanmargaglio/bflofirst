@@ -31,7 +31,7 @@ def _list_tables():
             print t
 
 def _add_data():
-    #crawler.crawler()
+    crawler.crawler()
     data = pd.read_csv("full_data.csv")
     print "New Entries: ", len(data)
     added_count = 0

@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from models import Owner, Listing, Parcel, User, Log, db, FacebookLead, Property
 import csv
+import codecs
 import os
 from config import local_cities, admins, example_streets
 import datetime
@@ -125,7 +126,6 @@ def upload():
         file = request.files['file']
         if file.filename == '':
             return "Error: No file?"
-        
         csv_file = csv.reader(file)
         ret = ""
         for row in csv_file:
@@ -306,8 +306,11 @@ def _fbupdate():
 
     if t == "notes":
         listing = FacebookLead.query.filter(FacebookLead.id == i).first()
-        listing.notes = r
-        db.session.add(listing)
+        if r == "!DELETE" and current_user.email in admins:
+            db.session.delete(listing)
+        else:
+            listing.notes = r
+            db.session.add(listing)
         db.session.commit()
     
     return jsonify(res = "success")
@@ -355,7 +358,11 @@ def expires():
     if request.args.get('locality'):
         working_list = working_list.filter(Listing.city.in_(local_cities))
         cont_params += "&locality="+request.args.get('locality')
-
-    entry_list = working_list.order_by(Listing.exp_date.desc()).all()
+        
+    if request.args.get('order'):
+        entry_list = working_list.order_by(Listing.exp_date).all()
+    else:
+        entry_list = working_list.order_by(Listing.exp_date.desc()).all()
+        
     return render_template("results.html", page=int(page), params = cont_params, max_page=int(len(entry_list)/25.), entries=entry_list[25*int(page):25*(int(page)+1)])
 
