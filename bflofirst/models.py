@@ -373,9 +373,19 @@ class Log(db.Model):
     user = db.Column(db.String(128), db.ForeignKey('users.email'))
     info = db.Column(db.String(512))
     
+class Chat(db.Model):
+    __tablename__ = "chats"
+    id = db.Column(db.Integer, autoincrement=True,primary_key=True)
+    time = db.Column(db.DateTime)
+    user = db.Column(db.String(128), db.ForeignKey('users.email'))
+    message = db.Column(db.String(512))
+    
 if __name__=="__main__":
+    db.create_all()
+    """
     migrate = Migrate(app, db)
     manager = Manager(app)
     
     manager.add_command('db', MigrateCommand)
     manager.run()
+    """

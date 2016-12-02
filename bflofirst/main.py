@@ -8,10 +8,11 @@ from flask_wtf import Form
 from flask_wtf.file import FileField
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
-from models import Owner, Listing, Parcel, User, Log, db, FacebookLead, Property
+from models import Owner, Listing, Parcel, User, Log, db, FacebookLead, Property, Chat
 import csv
 import codecs
 import os
+from flask_socketio import SocketIO, emit
 from config import local_cities, admins, example_streets
 import datetime
 
@@ -31,6 +32,9 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = False
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+socketio = SocketIO()
+socketio.init_app(app)
 
 db.init_app(app)
 
@@ -76,49 +80,7 @@ def tax_records():
 @login_required
 def upload():
     if request.method == "GET":
-        ret = """
-        <html>
-  
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-    rel="stylesheet" type="text/css">
-    <link href="../static/css/login_b.css" rel="stylesheet" type="text/css">
-    <!--
-    <link href="{{url_for("static", filename="css/login_b.css
-    " )}} rel="stylesheet" type="text/css">
-    -->
-  </head>
-  
-  <body>
-    <div class="cover">
-      <div class="cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center userbox">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                
-                <form action="upload" method=post enctype=multipart/form-data> 
-                    <input type='file' name='file'> 
-                    <input type='submit' value="Upload and Process Selected File"> 
-                </form>
-                
-                </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    </body>
-        """
-        return ret
+        return redirect(url_for('index'))
     
     if request.method == "POST":
         if 'file' not in request.files:
@@ -366,3 +328,50 @@ def expires():
         
     return render_template("results.html", page=int(page), params = cont_params, max_page=int(len(entry_list)/25.), entries=entry_list[25*int(page):25*(int(page)+1)])
 
+# SOCKET-IO
+@socketio.on('connect')
+def test_connect():
+    greeting = """ Greetings!  You have opened BDS's new chat module.  It has been painfully coded from scratch by Nate, and as such is probably buggy as hell.  
+Consider this module in alpha stages, as it does not have the features required to be of much use.      
+But feel free to play around with it and let me know if there is anything I can add or change to get it up to spec.
+(Note: Your browser might be loading old files.  In this case, reloading using "Ctrl + Shift + r" should fix things).
+On a new load, only the last 10 messages will appear.  Click the load button to load the 100 most recent messages.
+Adding an integer to the text box then pressing load will load that many of the most recent messages.
+- Nate
+"""
+    emit('my_response', {'user':"Admin", 'data':greeting})
+    
+    loaded = ""
+    for c in Chat.query.order_by(Chat.time).all()[-10:]:
+        emit('my_response', {'user':c.user + " ({})".format(c.time - datetime.timedelta(hours=5)), 'data':c.message})
+        
+@socketio.on('load')
+def loadposts(json):
+    try:
+        limit = int(json['data'])
+    except:
+        limit = 100
+        
+    loaded = ""
+    for c in Chat.query.order_by(Chat.time).all()[-limit:]:
+        loaded += c.user + " ({}): ".format(c.time - datetime.timedelta(hours=5)) + c.message + "\n"
+    emit('my_response', {'user':"Loaded" + " ({})".format(c.time - datetime.timedelta(hours=5)), 'data':"\n"+loaded})
+
+    
+@socketio.on('my event')
+def newpost(json):
+    try:
+        user = current_user.email
+    except:
+        user = "Anon"
+    try:
+        c = Chat()
+        c.user = user
+        c.message = json['data']
+        c.time = datetime.datetime.now()
+        db.session.add(c)
+        db.session.commit()
+    except:
+        pass
+    emit('my_response', {'user':user, 'data':json['data']}, broadcast=True)
+    

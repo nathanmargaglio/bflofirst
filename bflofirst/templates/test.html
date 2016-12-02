@@ -1,62 +1,20 @@
-<html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!--{{sc}} <link href="{{url_for("static", filename="css/login_b.css"
-    )}}" rel="stylesheet" type="text/css">
-	{{ec}}-->
-    <link rel="stylesheet" href="../static/css/login_b.css">
-    <style>
-    	/* Modal Header */
-		.modal-header {
-		    padding: 2px 16px;
-		    background-color: #5cb85c;
-		    color: white;
-		}
-		
-		/* Modal Body */
-		.modal-body {
-			padding: 2px 16px;
-			max-height: 50%;
-			overflow: auto
-		}
-		
-		/* Modal Footer */
-		.modal-footer {
-		    padding: 2px 16px;
-		    background-color: #5cb85c;
-		}
-		
-		/* Modal Content */
-		.modal-content {
-		    position: relative;
-		    background-color: #fefefe;
-		    margin: auto;
-		    padding: 0;
-		    border: 1px solid #888;
-		    width: 80%;
-		    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-		    -webkit-animation-name: animatetop;
-		    -webkit-animation-duration: 0.4s;
-		    animation-name: animatetop;
-		    animation-duration: 0.4s
-		}
-		
-		/* Add Animation */
-		@-webkit-keyframes animatetop {
-		    from {top: -300px; opacity: 0} 
-		    to {top: 0; opacity: 1}
-		}
-		
-		@keyframes animatetop {
-		    from {top: -300px; opacity: 0}
-		    to {top: 0; opacity: 1}
-		}
-		</style>
-  </head><body>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    	<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    	
+	    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	    <!--{{sc}} <link href="{{url_for("static", filename="css/login_b.css"
+	    )}}" rel="stylesheet" type="text/css">
+		{{ec}}-->
+	    <link rel="stylesheet" href="../static/css/login_b.css">
+	    
+	    </head>
+  
+  <body>
     <div class="cover">
       <div class="cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
       <div class="container userbox">
@@ -66,70 +24,16 @@
             <!-- Trigger/Open The Modal -->
 			<button id="myBtn">Open Modal</button>
 			
-			<!-- The Modal -->
-			<div id="myModal" class="modal">
-			
-			  <!-- Modal content -->
-				<div class="modal-content">
-				  <div class="modal-header">
-				    <span class="close">×</span>
-				    <h2>Modal Header</h2>
-				  </div>
-				  
-				  <div class="modal-body">
-				    <p>Some text in the Modal Body</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				    <p>Some other text...</p>
-				  </div>
-				  
-				  <div class="modal-footer">
-
-						<input type="text" style="width: 80%">
-						<input type="submit" value="Submit">
-
-				  </div>
-				</div>
-			
 			</div>
 
           </div>
         </div>
       </div>
     </div>
+    
+<link rel="import" id="chat_module" href="{{url_for("static", filename="chat.html")}}">
+<link href="{{url_for("static", filename="css/chat.css")}}" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{{url_for("static", filename="js/chat.js")}}"></script>
+	    
 
-	<script type="text/javascript">
-    	// Get the modal
-		var modal = document.getElementById('myModal');
-		
-		// Get the button that opens the modal
-		var btn = document.getElementById("myBtn");
-		
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
-		
-		// When the user clicks on the button, open the modal 
-		btn.onclick = function() {
-		    modal.style.display = "block";
-		}
-		
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-		    modal.style.display = "none";
-		}
-		
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-		    if (event.target == modal) {
-		        modal.style.display = "none";
-		    }
-		}
-	</script>
 </body></html>

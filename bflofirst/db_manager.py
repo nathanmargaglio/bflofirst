@@ -6,7 +6,7 @@ import pandas as pd
 import time, re, os, requests
 import datetime
 
-from models import Listing, User, Owner, Parcel, Log
+from models import Listing, User, Owner, Parcel, Log, Chat
 
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
