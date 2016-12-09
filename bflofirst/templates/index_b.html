@@ -13,6 +13,7 @@
     </head><body>
         <div class="cover">
             <div class="background-image-fixed cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
+            <span id="chat_area"></span>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center userbox">
@@ -130,8 +131,10 @@
             </div>
         </div>
     
-<!--Chat Module-->
-<button class="topcorner" id="myBtn">Open Chat</button>
+<!--Chat Module
+<button class="slideout" id="myBtn">Open Chat</button>
+-->
+<img src="http://www53.atpages.jp/pokemoso21/img/tab.png" id="slideout">
 <link rel="import" id="chat_module" href="{{url_for("static", filename="chat.html")}}">
 <link href="{{url_for("static", filename="css/chat.css")}}" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{{url_for("static", filename="js/chat.js")}}"></script>

@@ -4,10 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
-import models
-
 app = Flask(__name__)
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 db.init_app(app)
 
 app.config['SECRET_KEY'] = "secret"

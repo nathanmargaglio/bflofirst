@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 import string
+import sys
+from _mysql_exceptions import ProgrammingError
 
 if __name__ == "__main__":
     from flask_script import Manager
@@ -243,6 +245,7 @@ class User(db.Model):
     email = db.Column(db.String(64), primary_key=True)
     password = db.Column(db.String(1024))
     store = db.Column(db.String(64))
+    room = db.Column(db.String(64), default='0')
     admin = db.Column(db.Boolean, default=False)
     
     def set_email(self,email):
@@ -318,6 +321,8 @@ class FacebookLead(db.Model):
         self.street_address = row[12]
         self.zip_code = row[13]
         self.phone_number = row[14]
+        
+        self.date_added = datetime.datetime.now();
     
 class Property(db.Model):
     __tablename__ = "properties"
@@ -376,16 +381,24 @@ class Log(db.Model):
 class Chat(db.Model):
     __tablename__ = "chats"
     id = db.Column(db.Integer, autoincrement=True,primary_key=True)
+    room = db.Column(db.String(128))
     time = db.Column(db.DateTime)
     user = db.Column(db.String(128), db.ForeignKey('users.email'))
     message = db.Column(db.String(512))
     
 if __name__=="__main__":
-    db.create_all()
+    """
+    com = ""
+    while com != "!exit":
+        com = raw_input("> ")
+        try:
+            for i in db.engine.execute(com):
+                print i
+        except Exception as e:
+            print e
     """
     migrate = Migrate(app, db)
     manager = Manager(app)
     
     manager.add_command('db', MigrateCommand)
     manager.run()
-    """

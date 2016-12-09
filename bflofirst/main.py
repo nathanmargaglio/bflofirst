@@ -15,11 +15,13 @@ import os
 from flask_socketio import SocketIO, emit
 from config import local_cities, admins, example_streets
 import datetime
+from api import api_module
 
 def dev_mode():
     return os.environ['SERVER_SOFTWARE'].startswith('Development')
 
 app = Flask(__name__)
+app.register_blueprint(api_module)
 app.config['SECRET_KEY'] = "secret"
 app.config['SERVER_NAME'] = 'buffalodataserver.com'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:margaglio22@/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
@@ -323,43 +325,75 @@ def expires():
         
     if request.args.get('order'):
         entry_list = working_list.order_by(Listing.exp_date).all()
+        cont_params += "&order="+request.args.get('order')
     else:
         entry_list = working_list.order_by(Listing.exp_date.desc()).all()
         
     return render_template("results.html", page=int(page), params = cont_params, max_page=int(len(entry_list)/25.), entries=entry_list[25*int(page):25*(int(page)+1)])
 
 # SOCKET-IO
-@socketio.on('connect')
-def test_connect():
-    greeting = """ Greetings!  You have opened BDS's new chat module.  It has been painfully coded from scratch by Nate, and as such is probably buggy as hell.  
-Consider this module in alpha stages, as it does not have the features required to be of much use.      
-But feel free to play around with it and let me know if there is anything I can add or change to get it up to spec.
-(Note: Your browser might be loading old files.  In this case, reloading using "Ctrl + Shift + r" should fix things).
-On a new load, only the last 10 messages will appear.  Click the load button to load the 100 most recent messages.
-Adding an integer to the text box then pressing load will load that many of the most recent messages.
+@socketio.on('init_connect')
+def init_connect(json):
+    current_user.room = json['room']
+    db.session.add(current_user)
+    db.session.commit()
+    
+    if current_user.room == '0':
+        greeting = """ Greetings!  You have opened BDS's new chat module. It has been painfully coded from scratch by Nate, and as such is probably buggy as hell. Consider this module in alpha stages, as it does not have the features required to be of much use.  But play around with it and let me know if there is anything I can add to get it up to spec.
+Only the last 10 messages will appear.  Click the load button for the 100 most recent messages.  Adding an integer to the text box then pressing load will load that many most recent messages.
 - Nate
 """
-    emit('my_response', {'user':"Admin", 'data':greeting})
+    elif current_user.room == '1':
+        greeting = """You've entered the Follow Up room!  We'll add functionality to organize follow ups on leads here."""
+    elif current_user.room == '2':
+        greeting = """Heres our "Other" room.  So, other discussion is here."""
     
-    loaded = ""
-    for c in Chat.query.order_by(Chat.time).all()[-10:]:
-        emit('my_response', {'user':c.user + " ({})".format(c.time - datetime.timedelta(hours=5)), 'data':c.message})
+    emit('my_response', {'user':"Admin", 'data':greeting, 'room':current_user.room})
+    
+    for c in Chat.query.filter(Chat.room == current_user.room).order_by(Chat.time).all()[-10:]:
+        emit('my_response', {'user':c.user + " ({})".format(c.time - datetime.timedelta(hours=5)), 'data':c.message, 'room':current_user.room})
+    
+@socketio.on('connect')
+def connect():
+    pass
         
 @socketio.on('load')
 def loadposts(json):
+    room = json['room']
+    current_user.room = room
+    db.session.add(current_user)
+    db.session.commit()
     try:
         limit = int(json['data'])
     except:
         limit = 100
         
     loaded = ""
-    for c in Chat.query.order_by(Chat.time).all()[-limit:]:
+    for c in Chat.query.filter(Chat.room == room).order_by(Chat.time).all()[-limit:]:
         loaded += c.user + " ({}): ".format(c.time - datetime.timedelta(hours=5)) + c.message + "\n"
-    emit('my_response', {'user':"Loaded" + " ({})".format(c.time - datetime.timedelta(hours=5)), 'data':"\n"+loaded})
+
+    emit('my_response', {'user':"Loaded", 'data':"Room " + str(room) + "\n"+loaded, 'room':current_user.room})
 
     
-@socketio.on('my event')
+@socketio.on('to_server')
 def newpost(json):
+    if json['data'][0] == '~':
+        if current_user.email in admins:
+            current_user.room = -1
+            db.session.add(current_user)
+            db.session.commit()
+            emit('shell', {'user':current_user.email, 'data':"<b>Entered Command Mode.<b>", 'room':-1})
+            return
+        
+    if current_user.room == '-1':
+        emit('my_response', {'user':current_user.email, 'data':json['data'], 'room':current_user.room}, broadcast=True)
+        try:
+            for i in db.engine.execute(json['data']):
+                emit('my_response', {'user':"SQL", 'data':str(i), 'room':-1}, broadcast=True)
+        except Exception as e:
+            emit('my_response', {'user':"SQL", 'data':str(e), 'room':-1}, broadcast=True)
+        return
+            
     try:
         user = current_user.email
     except:
@@ -368,10 +402,18 @@ def newpost(json):
         c = Chat()
         c.user = user
         c.message = json['data']
+        c.room = json['room']
         c.time = datetime.datetime.now()
         db.session.add(c)
         db.session.commit()
     except:
         pass
-    emit('my_response', {'user':user, 'data':json['data']}, broadcast=True)
+    emit('my_response', {'user':user, 'data':json['data'], 'room':current_user.room}, broadcast=True)
     
+@socketio.on('shell')
+def shell(json):
+    try:
+        for i in db.engine.execute(json['data']):
+            print i
+    except Exception as e:
+        print e

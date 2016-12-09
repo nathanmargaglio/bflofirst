@@ -24,18 +24,15 @@
                       	});
                       	
                       	$(function() {
-                      		$("input[name='notes']").keydown(function(e){
-                      			if (e.keyCode != 13){
-                      				this.style = "background-color: LightCoral";
-                      			}
-                      			if (e.keyCode == 13){
-                      				this.style = "background-color: YellowGreen";
+                      		$("input[name='notes']").on("change paste keyup", function(){
+                      				that = this;
+                      				this.style = "background-color: LightGreen";
+                      				setTimeout(function(){ that.style = "background-color: White";}, 3000);
                       				$.get($SCRIPT_ROOT + "/_update", {
                       					t: "notes",
                       					r: this.value,
                       					i: this.id
                       				});
-                      			};
                       		});
                       	});
                       	
@@ -65,6 +62,7 @@
         <div class="cover">
             <div class="background-image-fixed cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
             <div class="container">
+            	<span id="chat_area"></span>
                 <div class="row">
                     <div class="col-md-12 text-center userbox">
                         <div class="container">
@@ -161,8 +159,10 @@
             </div>
         </div>
 
-<!--Chat Module-->
-<button class="topcorner" id="myBtn">Open Chat</button>
+<!--Chat Module
+<button class="slideout" id="myBtn">Open Chat</button>
+-->
+<img src="http://www53.atpages.jp/pokemoso21/img/tab.png" id="slideout">
 <link rel="import" id="chat_module" href="{{url_for("static", filename="chat.html")}}">
 <link href="{{url_for("static", filename="css/chat.css")}}" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{{url_for("static", filename="js/chat.js")}}"></script>

@@ -1,39 +1,70 @@
 <html>
-	<head>
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    	<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    	
-	    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	    <!--{{sc}} <link href="{{url_for("static", filename="css/login_b.css"
-	    )}}" rel="stylesheet" type="text/css">
-		{{ec}}-->
-	    <link rel="stylesheet" href="../static/css/login_b.css">
-	    
-	    </head>
-  
-  <body>
-    <div class="cover">
-      <div class="cover-image" style="background-image : url('http://wallpaper.zone/img/4872271.jpg')"></div>
-      <div class="container userbox">
-        <div class="row">
-          <div class="col-md-12 testbox">
-            
-            <!-- Trigger/Open The Modal -->
-			<button id="myBtn">Open Modal</button>
-			
-			</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-          </div>
-        </div>
-      </div>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #master {
+            width: 100%;
+            height: 100%;
+            background-color: lightgray;
+        }
+
+        #console {
+            width: 50%;
+            height: 100%;
+            float: left;
+            background-color: lightgreen;
+            border-right-style: solid;
+        }
+
+        #results {
+            width: auto;
+            height: 100%;
+            background-color: pink;
+            overflow: auto;
+        }
+
+        #console_tab {
+            position: absolute;
+            top: 50%;
+            transition: width 2s;
+            z-index: 999;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<div id="master">
+    <!-- CONSOLE -->
+    <div id="console">
+        <!--img id="planet" src="http://space-facts.com/wp-content/uploads/saturn-transparent.png" width="100%"-->
     </div>
-    
-<link rel="import" id="chat_module" href="{{url_for("static", filename="chat.html")}}">
-<link href="{{url_for("static", filename="css/chat.css")}}" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="{{url_for("static", filename="js/chat.js")}}"></script>
-	    
 
-</body></html>
+    <!-- RESULTS -->
+    <div id="results">
+        <img id="console_tab" src="https://s16.postimg.org/w2jl9yket/BDS_Tab.png">
+        <div id="table_div"></div>
+    </div>
+</div>
+
+</body>
+
+<script type="text/javascript" src="{{url_for("static", filename="js/results.js")}}"></script>
+</html>

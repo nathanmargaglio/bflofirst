@@ -97,6 +97,7 @@
                         <th>Zip Code</th>
                         <th>Phone</th>
                         <th>Campaign</th>
+                        <th>Date Added</th>
                         <th>Notes</th>
                       </tr>
                     </thead>
@@ -109,6 +110,7 @@
                         <td class="text-left">{{i.zip_code}}</td>
                         <td class="text-left">{{i.phone_number}}</td>
                         <td class="text-left">{{i.campaign_name}}</td>
+                        <td class="text-left">{{i.date_added}}</td>
                         <!-- Notes -->
                         <td class="text-left">{% if i.notes != None %}
                           <input type="text" id="{{i.id}}" name="notes"
