@@ -1,0 +1,80 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
+    <link href="/static/css/paginate.css" rel="stylesheet">
+    <link href="/static/css/main.css?{{ range(100, 999) | random }}" rel="stylesheet">
+
+</head>
+
+<body background="/static/img/subtle_carbon.png">
+
+<div id="master">
+    <div id="sub">
+        <!-- CONSOLE -->
+        <div id="console">
+            <img id="results_tab" src="https://s16.postimg.org/w2jl9yket/BDS_Tab.png">
+            <h1>bflofirst_ds</h1>
+            <!--img class="loader" src="static/img/squares.gif"-->
+
+            <div id="chat_window">
+
+                <div id="chat_window_sub">
+                    <div id="message-container">
+                        <!-- MESSAGES GO HERE -->
+                        <div class="message" id="message_template" style="visibility: hidden">
+                            <div id="username"></div>
+                            <div class="message-avatar">
+                                <img id="avatar" src="http://tinygraphs.com/labs/isogrids/hexa/nathan?theme=bythepool&numcolors=4&size=220&fmt=svg">
+                            </div>
+                            <div class="message-text">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="text_form">
+                        <textarea id="text_input" maxlength="512"></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RESULTS -->
+        <div id="results">
+            <img class="loader" src="static/img/ripple.gif">
+            <img id="console_tab" src="https://s16.postimg.org/w2jl9yket/BDS_Tab.png">
+
+            <div>
+                <div class="paginate paginate-dark wrapper">
+                    <ul>
+                        <li><a id="prev">&lang;</a></li>
+                        <li><a>0</a></li>
+                        <li><a class="more">&hellip;</a></li>
+                        <li><a>9</a></li>
+                        <li><a id="next">&rang;</a></li>
+                    </ul>
+                </div>
+                <div id="table_div"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<link rel="import" id="chat_module" href="/static/chat.html">
+<link href="/static/css/chat.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src='/static/js/chat.js'></script>
+-->
+
+<script type="text/javascript" src='/static/js/results.js?{{ range(100, 999) | random }}'></script>
+
+</body>
+</html>

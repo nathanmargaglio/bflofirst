@@ -1,9 +1,0 @@
-../flask_mysqldb/__init__.py
-../flask_mysqldb/__init__.pyc
-top_level.txt
-pbr.json
-PKG-INFO
-requires.txt
-SOURCES.txt
-dependency_links.txt
-not-zip-safe
