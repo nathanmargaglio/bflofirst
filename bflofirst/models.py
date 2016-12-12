@@ -322,7 +322,7 @@ class FacebookLead(db.Model):
         self.zip_code = row[13]
         self.phone_number = row[14]
         
-        self.date_added = datetime.datetime.now();
+        self.date_added = datetime.datetime.now()
     
 class Property(db.Model):
     __tablename__ = "properties"
@@ -385,6 +385,76 @@ class Chat(db.Model):
     time = db.Column(db.DateTime)
     user = db.Column(db.String(128), db.ForeignKey('users.email'))
     message = db.Column(db.String(512))
+
+class Lead(db.Model):
+    __tablename__ = "leads"
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    date_created = db.Column(db.DateTime)
+
+    ml = db.Column(db.String(128), nullable=True)
+    address = db.Column(db.String(128), nullable=True)
+    city = db.Column(db.String(128), nullable=True)
+    zipcode = db.Column(db.String(128), nullable=True)
+
+    owner_name = db.Column(db.String(128), nullable=True)
+    owner_address = db.Column(db.String(128), nullable=True)
+    owner_city = db.Column(db.String(128), nullable=True)
+    owner_zipcode = db.Column(db.String(128), nullable=True)
+    owner_phone = db.Column(db.String(128), nullable=True)
+    owner_email = db.Column(db.String(128), nullable=True)
+
+    notes = db.Column(db.String(512), nullable=True)
+    priority = db.Column(db.Integer, nullable=True)
+    status = db.Column(db.String(128), nullable=True)
+    phone_status = db.Column(db.String(128), nullable=True)
+    init_contact_date = db.Column(db.DateTime, nullable=True)
+    next_contact_date = db.Column(db.DateTime, nullable=True)
+
+    def set(self, data):
+        self.date_created = datetime.datetime.now()
+
+        self.ml = data['ml']
+        self.address = data['address']
+        self.city = data['city']
+        self.zipcode = data['zipcode']
+
+        self.owner_name = data['owner_name']
+        self.owner_address = data['owner_address']
+        self.owner_city = data['owner_city']
+        self.owner_zipcode = data['owner_zipcode']
+        self.owner_phone = data['owner_phone']
+        self.owner_email = data['owner_email']
+
+        self.priority = 0
+
+    def get(self):
+        data = {}
+
+        data['id'] = self.id
+        data['date_created'] = self.date_created
+
+        data['ml'] = self.ml
+        data['address'] = self.address
+        data['city'] = self.city
+        data['zipcode'] = self.zipcode
+
+        data['owner_name'] = self.owner_name
+        data['owner_address'] = self.owner_address
+        data['owner_city'] = self.owner_city
+        data['owner_zipcode'] = self.owner_zipcode
+        data['owner_phone'] = self.owner_phone
+        data['owner_email'] = self.owner_email
+
+        data['notes'] = self.notes
+        data['priority'] = self.priority
+        data['status'] = self.status
+        data['phone_status'] = self.phone_status
+        data['init_contact_date'] = self.init_contact_date
+        data['next_contact_date'] = self.next_contact_date
+
+        return data
+
+
     
 if __name__=="__main__":
     """
