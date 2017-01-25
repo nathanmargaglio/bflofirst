@@ -18,7 +18,8 @@
     <!--link href="/static/css/main.css?{{ range(100, 999) | random }}" rel="stylesheet"-->
 
     <!-- Material Design -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css"-->
+    <link href="/static/css/materialize.css?{{ range(100, 999) | random }}" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,246 +27,472 @@
 
 </head>
 
-<body class="teal">
-<!-- Sidebar -->
-<ul id="slide-out" class="side-nav">
-    <li>
-        <div class="userView">
-            <div class="background">
-                <img src="https://8d27d447d6c7bede7903-00fcdfda3fe26e81b0d2b3887b22d582.ssl.cf1.rackcdn.com/files/images/buffalo-ny-ttc-city-page.jpg">
-            </div>
-            <a href="#!user"><img class="circle"
-                                  src="https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAaHAAAAJDhmM2IyMTkyLTc1YTgtNDEyMy05OTU3LTU5MDU0MjAwMWVhMQ.png"></a>
-            <a href="#!name"><span class="white-text name">Buffalo First</span></a>
-            <a href="#!email"><span class="white-text email">nathanmargaglio@gmail.com</span></a>
+<body>
+    <!-- HEADER -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo right">BFLO_DS</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+            <ul class="left hide-on-med-and-down">
+                <li data-activates="mobile-demo" class="button-collapse"> <a href="#!"><i class="material-icons">menu</i></a></li>
+
+                <li onclick="showCard('home_card')" class="nav_item" id="nav_home_card"> <a href="#!"><i class="material-icons left">account_circle</i>Home</a></li>
+                <li onclick="showCard('lead_card')" class="nav_item" id="nav_lead_card"><a href="#!"><i class="material-icons left">alarm</i>Leads</a></li>
+                <li onclick="showCard('claimed_card')" class="nav_item" id="nav_claimed_card"><a href="#!"><i class="material-icons left">announcement</i>Claimed</a></li>
+                <li onclick="showCard('update_card')" class="nav_item" id="nav_update_card"><a href="#!"><i class="material-icons left">cloud</i>Updates</a></li>
+            </ul>
+
+            <ul class="side-nav" id="mobile-demo">
+                <li>
+                    <div class="userView">
+                        <div class="background">
+                            <img src="https://8d27d447d6c7bede7903-00fcdfda3fe26e81b0d2b3887b22d582.ssl.cf1.rackcdn.com/files/images/buffalo-ny-ttc-city-page.jpg">
+                        </div>
+                        <a href="#!user"><img class="circle"
+                                              src="https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAaHAAAAJDhmM2IyMTkyLTc1YTgtNDEyMy05OTU3LTU5MDU0MjAwMWVhMQ.png"></a>
+                        <a href="#!name"><span class="white-text name">Buffalo First</span></a>
+                        <a href="#!email"><span class="white-text email">nathanmargaglio@gmail.com</span></a>
+                    </div>
+                </li>
+
+                <li onclick="showCard('home_card')"><a href="#!"><i class="material-icons">account_circle</i>Home</a>
+                </li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li onclick="showCard('lead_card')"><a href="#!"><i class="material-icons">alarm</i>Leads</a></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li onclick="showCard('claimed_card')"><a href="#!"><i
+                        class="material-icons">announcement</i>Claimed</a></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li onclick="showCard('update_card')"><a href="#!"><i class="material-icons">cloud</i>Updates</a></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+            </ul>
+
         </div>
-    </li>
+    </nav>
 
-    <li onclick="showCard('home_card')"><a href="#!"><i class="material-icons">account_circle</i>Home</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li onclick="showCard('lead_card')"><a href="#!"><i class="material-icons">alarm</i>Leads</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li onclick="showCard('claimed_card')"><a href="#!"><i class="material-icons">announcement</i>Claimed</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li onclick="showCard('update_card')"><a href="#!"><i class="material-icons">cloud</i>Updates</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-</ul>
+    <!-- Master Container (i.e. MAIN)-->
+    <main class="container lighten-2">
 
-<!-- Master Container -->
-<div class="container teal lighten-2">
-
-
-    <!-- HOME -->
-    <div id="home_card" class="card-panel main-card">
-        <div class="row">
-            <a href="#" data-activates="slide-out" class="carousel-fixed-item button-collapse col s1"><i class="material-icons">menu</i></a>
-            <a href="#" class="col s1 offset-s6">BFLO_DS</a>
-        </div>
-
-        <div class="row">
-            <h1>Welcome!</h1>
-        </div>
-
-        <div class="row">
-            <button class="waves-effect waves-light btn-large col s3" onclick="showCard('home_card')"><i class="material-icons left">account_circle</i>Home</button>
-            <button class="waves-effect waves-light btn-large col s3" onclick="showCard('lead_card')"><i class="material-icons left">alarm</i>Leads</button>
-            <button class="waves-effect waves-light btn-large col s3" onclick="showCard('claimed_card')"><i class="material-icons left">announcement</i>Claimed</button>
-            <button class="waves-effect waves-light btn-large col s3" onclick="showCard('update_card')"><i class="material-icons left">cloud</i>Updates</button>
-        </div>
-    </div>
-
-    <!-- LEADS -->
-    <div id="lead_card" class="card-panel main-card" hidden>
-        <div class="row" id="lead_row_0">
-            <a href="#" data-activates="slide-out" class="col s1 button-collapse "><i class="material-icons">menu</i></a>
-            <a href="#" class="col s1"><i class="material-icons">chevron_left</i></a>
-            <a href="#" class="col s1"><i class="material-icons">chevron_right</i></a>
-            <a href="#" class="col s1 offset-s6">BFLO_DS</a>
-        </div>
-
-        <div id="lead_model" class="lead_model card horizontal col m12 l3">
-            <div class="card-stacked right-align">
-                <div class="card-content">
-                    <p class="lead_label address"></p>
-                    <p class="lead_label city"></p>
-                    <p class="lead_label date_created"></p>
-                </div>
-                <div class="card-action right-align">
-                  <a class="claim_btn btn tooltipped waves-effect waves-light" data-position="top" data-delay="50" data-tooltip="Click to Claim" data-target="lead_modal"><i class="material-icons left">cloud</i>claim</a>
-                </div>
+        <!-- HOME -->
+        <div id="home_card" class="card-panel main-card">
+            <div class="row">
+                <h1>BFLO DS</h1>
             </div>
 
-            <div id="lead_modal" class="modal modal-fixed-footer">
-                <div class="modal-content row">
-                    <div class="card horizontal col s12 l6">
-                        <span class="card-title">Property Info</span>
+            <div class="row">
+                <blockquote>
+                    Welcome to the new Buffalo Data Server!<br>
+                    I've reworked the entire site for a smooth UI experience as well as<br>
+                    improved the systems for organizing and distributing leads.<br><br>
+
+                    So no more pleb-level Bootstrap for us.  We're now working in Materialize.<br><br>
+
+                    Contact me, Nathan Margaglio, with any questions, bugs, or comments.<br>
+                    nathanmargaglio@gmail.com
+                </blockquote>
+            </div>
+
+            <div class="row">
+                <button class="waves-effect waves-light btn-large col s3" onclick="showCard('home_card')"><i class="material-icons left">account_circle</i>Home</button>
+                <button class="waves-effect waves-light btn-large col s3" onclick="showCard('lead_card')"><i class="material-icons left">alarm</i>Leads</button>
+                <button class="waves-effect waves-light btn-large col s3" onclick="showCard('claimed_card')"><i class="material-icons left">announcement</i>Claimed</button>
+                <button class="waves-effect waves-light btn-large col s3" onclick="showCard('update_card')"><i class="material-icons left">cloud</i>Updates</button>
+            </div>
+        </div>
+
+        <!-- LEADS -->
+        <div id="lead_card" class="card-panel main-card" hidden>
+
+            <div id="lead_model" class="lead_model card horizontal col m12 l3" hidden>
+                <div class="card-stacked right-align">
+                    <div class="card-content">
+                        <p class="lead_label address"></p>
+                        <p class="lead_label city"></p>
+                        <p class="lead_label date_created"></p>
+                    </div>
+                    <div class="card-action right-align">
+                      <a class="claim_btn btn tooltipped waves-effect waves-light" data-position="top" data-delay="50" data-tooltip="Click to Claim" data-target="lead_modal"><i class="material-icons left">cloud</i>claim</a>
+                    </div>
+                </div>
+
+                <div id="lead_modal" class="modal modal-fixed-footer">
+                    <div class="modal-content">
+                        <div class="row">
+                            <div class="card small col s12 l6">
+                                <span class="card-title">Property Info</span>
+                                <div class="card-content">
+                                    <p class="address"></p>
+                                    <p class="city"></p>
+                                    <p class="date_created"></p>
+                                    <p class="status"></p>
+                                </div>
+                            </div>
+                            <div class="card small col s12 l6">
+                                <span class="card-title">Owner Info</span>
+                                <div class="card-content">
+                                    <p class="owner_name"></p>
+                                    <p class="owner_phone"></p>
+                                    <p class="owner_address"></p>
+                                    <p class="owner_city"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="card-panel col s12">
+                                <div class="input-field col s6">
+                                    <select>
+                                        <option value="" disabled selected>Choose your option</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                    </select>
+                                    <label>Phone Status</label>
+                                </div>
+                                <div class="col s6">
+                                    <input type="date" class="datepicker">
+                                    <label>Follow-Up Date</label>
+                                 </div>
+                                <div class="input-field col s12">
+                                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                    <label for="textarea1">Notes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="card-panel col s12">
+                                <iframe style="width:100%; height: 450px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="lead_row">
+            </div>
+            <!-- Preloader -->
+            <div class="modal-progress progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+
+        <!-- CLAIMED -->
+        <div id="claimed_card" class="card-panel main-card" hidden>
+            <div class="row" id="claimed_row_0">
+                <a href="#" data-activates="slide-out" class="col s1 button-collapse "><i class="material-icons">menu</i></a>
+                <a href="#" class="col s1"><i class="material-icons">chevron_left</i></a>
+                <a href="#" class="col s1"><i class="material-icons">chevron_right</i></a>
+                <a href="#" class="col s1 offset-s6">BFLO_DS</a>
+            </div>
+            <div class="row" id="claimed_row_1">
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
                         <div class="card-content">
-                            <p class="address"></p>
-                            <p class="city"></p>
-                            <p class="date_created"></p>
-                            <p class="status"></p>
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Click to Claim" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
                         </div>
                     </div>
-                    <div class="card horizontal col s12 l6">
-                        <span class="card-title">Owner Info</span>
+
+                    <div id="claimed_modal_0x0" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
                         <div class="card-content">
-                            <p class="owner_name"></p>
-                            <p class="owner_phone"></p>
-                            <p class="owner_address"></p>
-                            <p class="owner_city"></p>
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
                         </div>
                     </div>
 
-                    <div class="card horizontal col s12 valign-wrapper">
-                        <div class="input-field col s6 valign">
-                            <select>
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                            </select>
-                            <label>Phone Status</label>
+                    <div id="claimed_modal_0x1" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
                         </div>
-                        <div class="col s6 valign">
-                            <input type="date" class="datepicker">
-                            <label>Birthdate</label>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
                         </div>
-                        <div class="input-field col s12 valign">
-                            <textarea id="textarea1" class="materialize-textarea"></textarea>
-                            <label for="textarea1">Notes</label>
+                    </div>
+                </div>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
                         </div>
-
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
                     </div>
 
-                    <div class="card horizontal col s12">
-                        <iframe style="width:100%; height: 450px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <div id="claimed_modal_0x2" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_0x3" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" id="claimed_row_2">
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_1x0" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_1x1" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_1x2" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_1x3" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="claimed_row_3">
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_2x0" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_2x1" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_2x2" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card horizontal col s12 m3">
+                    <div class="card-stacked right-align">
+                        <div class="card-content">
+                            <p class="priority_label">0</p>
+                            <p class="date_label">Oct 3</p>
+                            <p class="address_label">123 Fake St</p>
+                        </div>
+                        <div class="card-action right-align">
+                          <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                        </div>
+                    </div>
+
+                    <div id="claimed_modal_2x3" class="modal">
+                        <div class="modal-content">
+                            <h4>Lead</h4>
+                            <p>A bunch of text</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row" id="lead_row">
-        </div>
-
-        <script>
-            //builder
-            page = 0
-
-            getLeads = function(page){
-                callback = function(passed_data){
-                    data = passed_data.responseJSON
-                    console.log(data);
-                    appendLeads(data)
-                }
-                $.ajax({
-                    url: "leads?page="+page,
-                    type: "GET",
-                    //data: JSON.stringify(new_data),
-                    processData: false,
-                    dataType: 'json',
-                    contentType: "application/json; charset=UTF-8",
-                    complete: callback
-                });
-            }
-
-            getLead = function(lead_id){
-                callback = function(passed_data){
-                    data = passed_data.responseJSON
-                    console.log(data);
-
-                    lead_card = $('#lead_modal_'+lead_id);
-
-                    lead_card.find('.address').html(data['address']);
-                    lead_card.find('.city').html(data['city'] + ', ' + data['zipcode']);
-                    lead_card.find('.date_created').html("Added " + data['date_created']);
-                    lead_card.find('.status').html("Status: " + data['status']);
-
-                    lead_card.find('.owner_name').html(data['owner_name']);
-                    lead_card.find('.owner_address').html(data['owner_address']);
-                    lead_card.find('.owner_city').html(data['owner_city'] + ', ' + data['owner_zipcode']);
-                    lead_card.find('.owner_phone').html(data['owner_phone']);
-
-                    google_maps_params = data['owner_address']+' '+data['owner_city']+' '+data['owner_zipcode']
-                    lead_card.find('iframe').attr('src','https://www.google.com/maps/embed/v1/place?q='+ google_maps_params +'&zoom=14&key=AIzaSyCTisQRQa4RxwdThBQvWjAF9pwbHW9F3RY')
-
-                }
-                $.ajax({
-                    url: "leads/"+lead_id,
-                    type: "GET",
-                    //data: JSON.stringify(new_data),
-                    processData: false,
-                    dataType: 'json',
-                    contentType: "application/json; charset=UTF-8",
-                    complete: callback
-                });
-            }
-
-            appendText = function(text){
-                $('#lead_card').append(text);
-            }
-            appendLeads = function(leads){
-                $('#lead_model').show();
-                last_id = ""
-                for(i = 0; i < leads.length; ++i){
-                    lead_card = $( "#lead_model" ).clone()
-                    lead_card.attr('id',leads[i]['id'])
-                    lead_card.find('.address').html(leads[i]['address']);
-                    lead_card.find('.city').html(leads[i]['city'] + ', ' + leads[i]['zipcode']);
-                    lead_card.find('.date_created').html("Added " + leads[i]['date_created']);
-                    lead_card.appendTo( "#lead_row" );
-
-                    lead_id = leads[i]['id']
-                    lead_card.find('.modal').attr('data-id',lead_id);
-
-                    lead_card.find('.claim_btn').attr('data-target','lead_modal_'+lead_id)
-                    lead_card.find('#lead_modal').attr('id','lead_modal_'+lead_id)
-                };
-
-                $('#lead_model').hide();
-                var options = [
-                            {selector: '.container', offset: 0, callback: function() {
-                                getLeads(page);
-                                page++;
-                                }}];
-                Materialize.scrollFire(options);
-
-                $(document).ready(function(){
-                    $('.modal').modal({
-                        starting_top: '4%', // Starting top style attribute
-                        ending_top: '10%', // Ending top style attribute
-                      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-                        getLead(modal.attr('data-id'));
-                      },
-                      complete: function() { } // Callback for Modal close
-                    }
-                  );
-                });
-            }
-             getLeads(page);
-
-        </script>
-    </div>
-
-    <!-- CLAIMED -->
-    <div id="claimed_card" class="card-panel main-card" hidden>
-        <div class="row" id="claimed_row_0">
-            <a href="#" data-activates="slide-out" class="col s1 button-collapse "><i class="material-icons">menu</i></a>
-            <a href="#" class="col s1"><i class="material-icons">chevron_left</i></a>
-            <a href="#" class="col s1"><i class="material-icons">chevron_right</i></a>
-            <a href="#" class="col s1 offset-s6">BFLO_DS</a>
-        </div>
-        <div class="row" id="claimed_row_1">
+        <!-- UPDATES -->
+        <div id="update_card" class="card-panel main-card" hidden>
+            <div class="row">
+                <a href="#" data-activates="slide-out" class="carousel-fixed-item button-collapse col s1"><i class="material-icons">menu</i></a>
+            </div>
+            <div class="row">
+                <div class="jalendar col s12"></div>
+            </div>
+            <div class="row">
+                <a href="#" class="col s1"><i class="material-icons">chevron_left</i></a>
+                <a href="#" class="col s1"><i class="material-icons">chevron_right</i></a>
+            </div>
+            <div class="row" id="update_row_1">
 
             <div class="card horizontal col s12 m3">
                 <div class="card-stacked right-align">
@@ -275,11 +502,11 @@
                         <p class="address_label">123 Fake St</p>
                     </div>
                     <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Click to Claim" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
                     </div>
                 </div>
 
-                <div id="claimed_modal_0x0" class="modal">
+                <div id="update_modal_0x0" class="modal">
                     <div class="modal-content">
                         <h4>Lead</h4>
                         <p>A bunch of text</p>
@@ -298,11 +525,11 @@
                         <p class="address_label">123 Fake St</p>
                     </div>
                     <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
                     </div>
                 </div>
 
-                <div id="claimed_modal_0x1" class="modal">
+                <div id="update_modal_0x1" class="modal">
                     <div class="modal-content">
                         <h4>Lead</h4>
                         <p>A bunch of text</p>
@@ -321,11 +548,11 @@
                         <p class="address_label">123 Fake St</p>
                     </div>
                     <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
                     </div>
                 </div>
 
-                <div id="claimed_modal_0x2" class="modal">
+                <div id="update_modal_0x2" class="modal">
                     <div class="modal-content">
                         <h4>Lead</h4>
                         <p>A bunch of text</p>
@@ -344,11 +571,11 @@
                         <p class="address_label">123 Fake St</p>
                     </div>
                     <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
                     </div>
                 </div>
 
-                <div id="claimed_modal_0x3" class="modal">
+                <div id="update_modal_0x3" class="modal">
                     <div class="modal-content">
                         <h4>Lead</h4>
                         <p>A bunch of text</p>
@@ -360,323 +587,50 @@
             </div>
 
         </div>
-        <div class="row" id="claimed_row_2">
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                    </div>
-                </div>
-
-                <div id="claimed_modal_1x0" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                    </div>
-                </div>
-
-                <div id="claimed_modal_1x1" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                    </div>
-                </div>
-
-                <div id="claimed_modal_1x2" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                    </div>
-                </div>
-
-                <div id="claimed_modal_1x3" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" id="claimed_row_3">
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                    </div>
-                </div>
-
-                <div id="claimed_modal_2x0" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                    </div>
-                </div>
-
-                <div id="claimed_modal_2x1" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                    </div>
-                </div>
-
-                <div id="claimed_modal_2x2" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                      <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="claimed_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                    </div>
-                </div>
-
-                <div id="claimed_modal_2x3" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- UPDATES -->
-    <div id="update_card" class="card-panel main-card" hidden>
-        <div class="row">
-            <a href="#" data-activates="slide-out" class="carousel-fixed-item button-collapse col s1"><i class="material-icons">menu</i></a>
-        </div>
-        <div class="row">
-            <div class="jalendar col s12"></div>
-        </div>
-        <div class="row">
-            <a href="#" class="col s1"><i class="material-icons">chevron_left</i></a>
-            <a href="#" class="col s1"><i class="material-icons">chevron_right</i></a>
-        </div>
-        <div class="row" id="update_row_1">
-
-        <div class="card horizontal col s12 m3">
-            <div class="card-stacked right-align">
-                <div class="card-content">
-                    <p class="priority_label">0</p>
-                    <p class="date_label">Oct 3</p>
-                    <p class="address_label">123 Fake St</p>
-                </div>
-                <div class="card-action right-align">
-                  <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                </div>
-            </div>
-
-            <div id="update_modal_0x0" class="modal">
-                <div class="modal-content">
-                    <h4>Lead</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                </div>
-            </div>
         </div>
 
-        <div class="card horizontal col s12 m3">
-            <div class="card-stacked right-align">
-                <div class="card-content">
-                    <p class="priority_label">0</p>
-                    <p class="date_label">Oct 3</p>
-                    <p class="address_label">123 Fake St</p>
-                </div>
-                <div class="card-action right-align">
-                  <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
+    </main>
+
+    <!-- FOOTER -->
+        <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+
+              </div>
+                <div class="col l4 offset-l2 s12 right">
+
                 </div>
             </div>
-
-            <div id="update_modal_0x1" class="modal">
-                <div class="modal-content">
-                    <h4>Lead</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            Made By Nathan Margaglio © 2017
+            <a class="grey-text text-lighten-4 valign-wrapper right" href="https://github.com/nathanmargaglio"><img class="out_icon valign" src="static/img/GitHub-Mark-32px.png" alt="Like my Code?"></a>
+            <a class="grey-text text-lighten-4valign-wrapper right" href="https://twitter.com/NathanMargaglio"><img class="out_icon valign" src="static/img/Twitter_Logo_White_On_Image.png" alt="Tweet at Me?"></a>
             </div>
-        </div>
-
-        <div class="card horizontal col s12 m3">
-            <div class="card-stacked right-align">
-                <div class="card-content">
-                    <p class="priority_label">0</p>
-                    <p class="date_label">Oct 3</p>
-                    <p class="address_label">123 Fake St</p>
-                </div>
-                <div class="card-action right-align">
-                  <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                </div>
-            </div>
-
-            <div id="update_modal_0x2" class="modal">
-                <div class="modal-content">
-                    <h4>Lead</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="card horizontal col s12 m3">
-            <div class="card-stacked right-align">
-                <div class="card-content">
-                    <p class="priority_label">0</p>
-                    <p class="date_label">Oct 3</p>
-                    <p class="address_label">123 Fake St</p>
-                </div>
-                <div class="card-action right-align">
-                  <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50" data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i class="material-icons left">cloud</i>claim</button>
-                </div>
-            </div>
-
-            <div id="update_modal_0x3" class="modal">
-                <div class="modal-content">
-                    <h4>Lead</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    </div>
-
-    <script>
-    $('.jalendar').jalendar();
-    $(".button-collapse").sideNav();
-    $(document).ready(function() {
-        $('select').material_select();
-    });
-
-    showCard = function(card_id){
-        $('.main-card').hide();
-        $('#'+card_id).show();
-        $('.button-collapse').sideNav('hide');
-    };
-
-    var page_param = location.search.split('page=')[1]
-    if (page_param == "leads"){
-        showCard("lead_card");
-    }
-    </script>
-<!-- script type="text/javascript" src='/static/js/results.js?{{ range(100, 999) | random }}'></script>
-<script type="text/javascript" src='/static/js/BFAPI.js?{{ range(100, 999) | random }}'></script-->
+          </div>
+        </footer>
 
 </body>
+    <style>
+        body {
+            background-image: url('static/img/bg.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+          }
+          main {
+            flex: 1 0 auto;
+          }
+          .out_icon{
+            width: 24px;
+            height: 24px;
+          }
+    </style>
+<!-- script type="text/javascript" src='/static/js/results.js?{{ range(100, 999) | random }}'></script>
+<script type="text/javascript" src='/static/js/BFAPI.js?{{ range(100, 999) | random }}'></script-->
+<script type="text/javascript" src='/static/js/beta.js?{{ range(100, 999) | random }}'></script>
 </html>
