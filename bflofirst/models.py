@@ -3,8 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 import string
-import sys
-from _mysql_exceptions import ProgrammingError
 
 if __name__ == "__main__":
     from flask_script import Manager
@@ -211,7 +209,10 @@ class Listing(db.Model):
     def addViaRow(self,row):
         import pandas as pd
         for k in self.strings:
-            self[k] = row[k]
+            try:
+                self[k] = row[k]
+            except:
+                pass
         
         for k in self.numbers:
             self[k] = self.str_to_num(row[k])
@@ -244,18 +245,15 @@ class User(db.Model):
     __tablename__ = "users"
     email = db.Column(db.String(64), primary_key=True)
     password = db.Column(db.String(1024))
-    store = db.Column(db.String(64))
-    room = db.Column(db.String(64), default='0')
     admin = db.Column(db.Boolean, default=False)
+    authenticated = db.Column(db.Boolean, default=False)
+    unfinished_lead = db.Column(db.Boolean, default=False)
     
     def set_email(self,email):
         self.email = email
     
     def set_password(self, password):
         self.password = generate_password_hash(password)
-        
-    def set_store(self, store):
-        self.store = store
     
     def check_password(self,password):
         return check_password_hash(self.password,password)
@@ -391,11 +389,12 @@ class Lead(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     date_created = db.Column(db.DateTime)
 
-    ml = db.Column(db.String(128), nullable=True)
+    # Property Info
     address = db.Column(db.String(128), nullable=True)
     city = db.Column(db.String(128), nullable=True)
     zipcode = db.Column(db.String(128), nullable=True)
 
+    # Contact Info
     owner_name = db.Column(db.String(128), nullable=True)
     owner_address = db.Column(db.String(128), nullable=True)
     owner_city = db.Column(db.String(128), nullable=True)
@@ -403,37 +402,32 @@ class Lead(db.Model):
     owner_phone = db.Column(db.String(128), nullable=True)
     owner_email = db.Column(db.String(128), nullable=True)
 
+    # Lead Info
     notes = db.Column(db.String(512), nullable=True)
-    priority = db.Column(db.Integer, nullable=True)
+    priority = db.Column(db.Float, default=0)
     status = db.Column(db.String(128), nullable=True)
+    mail_status = db.Column(db.Boolean, default=False)
     phone_status = db.Column(db.String(128), nullable=True)
-    init_contact_date = db.Column(db.DateTime, nullable=True)
+    claimed = db.Column(db.Boolean, default=False)
+    claim_user = db.Column(db.String(128), nullable=True)
+    claim_datetime = db.Column(db.DateTime, nullable=True)
     next_contact_date = db.Column(db.DateTime, nullable=True)
 
-    def set(self, data):
+    def __init__(self):
         self.date_created = datetime.datetime.now()
 
-        self.ml = data['ml']
-        self.address = data['address']
-        self.city = data['city']
-        self.zipcode = data['zipcode']
-
-        self.owner_name = data['owner_name']
-        self.owner_address = data['owner_address']
-        self.owner_city = data['owner_city']
-        self.owner_zipcode = data['owner_zipcode']
-        self.owner_phone = data['owner_phone']
-        self.owner_email = data['owner_email']
-
-        self.priority = 0
-
-    def get(self):
+    def update(self, fields):
         data = {}
 
-        data['id'] = self.id
-        data['date_created'] = self.date_created
+        try:
+            data['id'] = self.id
+        except:
+            pass
+        try:
+            data['date_created'] = self.date_created
+        except:
+            pass
 
-        data['ml'] = self.ml
         data['address'] = self.address
         data['city'] = self.city
         data['zipcode'] = self.zipcode
@@ -449,8 +443,105 @@ class Lead(db.Model):
         data['priority'] = self.priority
         data['status'] = self.status
         data['phone_status'] = self.phone_status
-        data['init_contact_date'] = self.init_contact_date
+        data['mail_status'] = self.mail_status
+        data['claimed'] = self.claimed
+        data['claim_user'] = self.claim_user
+        data['claim_datetime'] = self.claim_datetime
         data['next_contact_date'] = self.next_contact_date
+
+        for k in fields:
+            data[k] = fields[k]
+
+        if self.claim_user:
+            user_model = db.session.query(User).filter(User.email == self.claim_user).first()
+            user_model.unfinished_lead = False
+            db.session.add(user_model)
+            db.session.commit()
+
+        self.set(data)
+
+    def set(self, data):
+        self.address = data['address']
+        self.city = data['city']
+        self.zipcode = data['zipcode']
+
+        self.owner_name = data['owner_name']
+        self.owner_address = data['owner_address']
+        self.owner_city = data['owner_city']
+        self.owner_zipcode = data['owner_zipcode']
+        self.owner_phone = data['owner_phone']
+        self.owner_email = data['owner_email']
+
+        self.notes = data['notes']
+        self.claimed = data['claimed']
+        self.claim_user = data['claim_user']
+        try:
+            self.priority = float(data['priority'])
+        except:
+            pass
+        self.status = data['status']
+        self.phone_status = data['phone_status']
+        try:
+            _mail_status = bool(data['mail_status'])
+            self.mail_status = _mail_status
+        except:
+            pass
+
+        try:
+            string_datetime = data['claim_datetime']
+            self.self.claim_datetime = datetime.datetime.strptime(string_datetime, "%Y-%m-%d %H:%M:%S.%f")
+        except:
+            pass
+
+        try:
+            string_datetime = data['next_contact_date']
+            self.next_contact_date = datetime.datetime.strptime(string_datetime, "%m/%d/%Y")
+        except:
+            pass
+
+    def claim(self, attempting_user):
+        user_model = db.session.query(User).filter(User.email == attempting_user).first()
+
+        #if user_model.unfinished_lead != True:
+        #    print "\nCLAIMING\n"
+        self.claim_user = attempting_user
+        self.claim_datetime = datetime.datetime.now()
+        self.claimed = True
+
+        user_model.unfinished_lead = True
+        db.session.add(user_model)
+        db.session.commit()
+
+
+    def read(self):
+        data = {}
+
+        data['id'] = self.id
+        data['date_created'] = self.date_created
+
+        data['address'] = self.address
+        data['city'] = self.city
+        data['zipcode'] = self.zipcode
+
+        data['owner_name'] = self.owner_name
+        data['owner_address'] = self.owner_address
+        data['owner_city'] = self.owner_city
+        data['owner_zipcode'] = self.owner_zipcode
+        data['owner_phone'] = self.owner_phone
+        data['owner_email'] = self.owner_email
+
+        data['notes'] = self.notes
+        data['priority'] = self.priority
+        data['status'] = self.status
+        data['phone_status'] = self.phone_status
+        data['mail_status'] = self.mail_status
+        data['claimed'] = self.claimed
+        data['claim_user'] = self.claim_user
+        data['claim_datetime'] = self.claim_datetime
+        try:
+            data['next_contact_date'] = self.next_contact_date.strftime('%x')
+        except:
+            data['next_contact_date'] = self.next_contact_date
 
         return data
 

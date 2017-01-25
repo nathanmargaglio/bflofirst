@@ -9,6 +9,7 @@ socketio = SocketIO()
 # SOCKET-IO
 @socketio.on('init_connect')
 def init_connect(json):
+    print current_user.email
     current_user.room = json['room']
     db.session.add(current_user)
     db.session.commit()
@@ -22,6 +23,8 @@ Only the last 10 messages will appear.  Click the load button for the 100 most r
         greeting = """You've entered the Follow Up room!  We'll add functionality to organize follow ups on leads here."""
     elif current_user.room == '2':
         greeting = """Heres our "Other" room.  So, other discussion is here."""
+    else:
+        greeting = "You've been connected to room " + str(current_user.room)
 
     emit('my_response', {'user': "Admin", 'data': greeting, 'room': current_user.room})
 

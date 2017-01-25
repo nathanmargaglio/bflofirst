@@ -135,12 +135,12 @@
                   <ul class="pager">
                     <li>
                       <!--{{sc}} {% if page> 0 %} {{ec}}-->
-                      <a href="{{url_for('expires', page = page-1) + params}}">←  Prev</a>
+                      <a href="{{url_for('expires', page = page-1)}}">←  Prev</a>
                       <!--{{sc}} {% endif %} {{ec}}-->
                     </li>
                     <li>
                       <!--{{sc}} {% if page < max_page %} {{ec}}-->
-                      <a href="{{url_for('expires', page = page+1) + params}}">Next  →</a>
+                      <a href="{{url_for('expires', page = page+1)}}">Next  →</a>
                       <!--{{sc}} {% endif %} {{ec}}-->
                     </li>
                   </ul>
