@@ -71,6 +71,11 @@
                                     <h1 class="text-primary logofont">
                                         <b>Expired Listings</b>
                                     </h1>
+                                    <h5>
+                                        During the migration, the numbers were lost.<br>
+                                        Use the links to get the number from YP.
+                                    </h5>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -110,11 +115,11 @@
                                                 <td class="text-left">{{i['Town/City']}}</td>
                                                 <td class="text-left">{{i['Owner 1 First Name'] + " " + i['Owner 1 Last Name']}}</td>
                                                 <td class="text-left">{{i['Expiration Date']}}</td>
-                                                <td class="text-left">{{i.owner.phone}}</td>
+                                                <td class="text-left"><a href="http://people.yellowpages.com/whitepages/address?street={{i['Address']}}&qloc={{i['Town/City']}}+ny">YP</a></td>
                                                 <!-- Checked Status -->
-                                                <td class="text-left">{% if i.owner.checked_number %}
-                                                    <input type="checkbox" id="{{i.owner_id}}" name="result" value="true" checked="">{% else %}
-                                                    <input type="checkbox" id="{{i.owner_id}}" name="result" value="true">{% endif %}</td>
+                                                <td class="text-left"> {% if 1==0 %}
+                                                    <input type="checkbox" id="i.owner_id" name="result" value="true" checked="">{% else %}
+                                                    <input type="checkbox" id="i.owner_id" name="result" value="true">{% endif %}</td>
                                                 <!-- Notes -->
                                                 <td class="text-left">{% if i.notes != None %}
                                                     <input type="text" id="{{i.id}}" name="notes" value="{{i.notes}}">{% else %}

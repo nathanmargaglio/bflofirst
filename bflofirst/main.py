@@ -10,7 +10,7 @@ import os
 from config import local_cities, admins, example_streets
 import datetime
 from api import api_module
-#from sockets import socketio
+from sockets import socketio
 
 def dev_mode():
     return os.environ['SERVER_SOFTWARE'].startswith('Development')
@@ -60,6 +60,11 @@ def after_request(r):
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def index():
+    return redirect(url_for('api.beta_page'))
+
+@app.route('/alpha', methods=['GET', 'POST'])
+@login_required
+def index_alpha():
     flash("You are logged in as {}".format(current_user.email))
     return render_template("index_b.html")
 
