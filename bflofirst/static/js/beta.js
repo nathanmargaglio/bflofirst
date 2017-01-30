@@ -6,7 +6,8 @@ $(document).ready(function() {
     $('.parallax').parallax();
 });
 page = 0
-$('#lead_model').hide();
+$('#tile_lead_model').hide();
+$('#hybrid_lead_model').hide();
 
 // Getting Admin Stuff
 admin_rights = ( $('#admin_rights').attr('class') == 'True')
@@ -85,6 +86,8 @@ getLead = function(passed_data){
 
     lead_id = data['id']
     lead_card = $('#lead_modal_'+lead_id);
+
+    console.log('#lead_modal_'+lead_id)
 
     lead_card.attr('lead_id',lead_id)
     lead_card.find('.edit-btn').attr('disabled', 'disabled');
@@ -188,80 +191,92 @@ appendLeads = function(leads, page_type="lead"){
         },
         "claimed": function(){
             Materialize.toast('!', 4000);
+        },
+        "admin": function(){
+            Materialize.toast('!', 4000);
         }
     };
 
-    if(page_type == "admin"){
-        for(i = 0; i < leads.length; ++i){
-            lead_row = $( "#admin_lead_model" ).clone()
-            lead_row.show()
-            lead_row.attr('id',leads[i]['id'])
-            lead_row.attr('class','lead_model')
-
-            lead_row.find('.collapsible-header.lead_collapsible').append(leads[i]['address'])
-            lead_row.find('.collapsible-body').attr('id', 'lead_modal_'+leads[i]['id'])
-
-            lead_row.appendTo( "#"+page_type+"_row" );
-        }
-        $('.collapsible').collapsible();
-        $('.lead_row').collapsible({
-            onOpen: function(el) {
-                            lead_id = el.attr('id');
-                            $('.modal-progress').show()
-                            $.ajax({
-                                url: "leads/"+lead_id,
-                                type: "POST",
-                                //data: JSON.stringify(new_data),
-                                processData: false,
-                                dataType: 'json',
-                                contentType: "application/json; charset=UTF-8",
-                                complete: getLead
-                            });}, // Callback for Collapsible open
-            onClose: function(el) { } // Callback for Collapsible close
-        });
-        return
-    }
-
-
     for(i = 0; i < leads.length; ++i){
-        lead_card = $( "#lead_model" ).clone()
-        lead_card.show()
-        lead_card.attr('id',leads[i]['id'])
-        lead_card.find('.address').html(leads[i]['address']);
-        lead_card.find('.city').html(leads[i]['city'] + ', ' + leads[i]['zipcode']);
-        lead_card.find('.date_created').html("Added " + leads[i]['date_created']);
-
-        lead_card.appendTo( "#"+page_type+"_row" );
-
+        lead_row = $( "#hybrid_lead_model" ).clone()
+        lead_row.show()
         lead_id = leads[i]['id']
-        lead_card.find('.modal').attr('data-id',lead_id);
+        lead_row.attr('id',leads[i]['id'])
+        //lead_row.attr('class','lead_model')
 
-        lead_card.find('.claim_btn').attr('data-target','lead_modal_'+lead_id)
-        lead_card.find('#lead_modal').attr('id','lead_modal_'+lead_id)
+        lead_row.find('.address').html(leads[i]['address']);
+        lead_row.find('.city').html(leads[i]['city'] + ', ' + leads[i]['zipcode']);
+        lead_row.find('.date_created').html("Added " + leads[i]['date_created']);
+        lead_row.find('.status').html(leads[i]['status']);
 
-        lead_card.find('.tooltipped').tooltip({delay: 50});
+        lead_row.find('.collapsible-header.lead_collapsible').append(leads[i]['address'])
+        lead_row.find('.collapsible-body').attr('id', 'lead_modal_'+leads[i]['id'])
+
+        lead_row.find('#lead_detail_list_').attr('id', 'lead_detail_list_'+leads[i]['id'])
+
+        lead_row.find('#lead_modal').attr('id','lead_modal_'+lead_id)
+        lead_row.find('#lead_modal_'+lead_id).attr('data-id',lead_id)
+
+        lead_row.find('.claim_btn').attr('data-id',lead_id)
+
+        if (page_type=="lead"){
+            lead_row.find('.claim_btn').click(function(){
+                claimButtonClick($(this).attr('data-id'))
+            })
+        }else{
+            lead_row.find('.claim_btn').click(function(){
+                $('#lead_modal_'+$(this).attr('data-id')).modal('open');
+            });
+        }
+
+        lead_row.find('.tooltipped').tooltip({delay: 50});
+
+        lead_row.appendTo( "#"+page_type+"_row" );
+
+        $('.collapsible').collapsible();
         $('#lead_modal_'+lead_id).modal({
             starting_top: '4%', // Starting top style attribute
             ending_top: '10%', // Ending top style attribute
             ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-                lead_id = modal.attr('data-id');
-                $('.modal-progress').show()
                 $.ajax({
-                    url: "leads/"+lead_id+"?claim=true",
-                    type: "POST",
-                    //data: JSON.stringify(new_data),
+                    url: "leads/"+modal.attr('data-id'),
+                    type: "GET",
+                    //data: JSON.stringify(post_data),
                     processData: false,
                     dataType: 'json',
                     contentType: "application/json; charset=UTF-8",
-                    complete: getLead
+                    complete: function(data){
+                        getLead(data);
+                    }
                 });
           },
           complete: function() {
             modalCompleteFunctions[page_type]();
           } // Callback for Modal close
+        });
+    }
+}
+
+claimButtonClick = function(lead_id){
+    claimCheck = function(rec_data){
+        data = rec_data.responseJSON
+        if (!('error' in data)){
+            $('#lead_modal_'+lead_id).modal('open');
+        }else{
+            Materialize.toast(data['error'], 4000);
+            $('#'+lead_id).hide()
         }
-      );
-    };
+    }
+    $.ajax({
+        url: "leads/"+lead_id+"?claim=true",
+        type: "POST",
+        //data: JSON.stringify(post_data),
+        processData: false,
+        dataType: 'json',
+        contentType: "application/json; charset=UTF-8",
+        complete: claimCheck
+    });
+
 }
 
 getMoreLeads = function(page_type="leads"){
@@ -283,14 +298,17 @@ showCard = function(card_id){
     page = 0;
 
     if (card_id == "lead_card"){
+        current_page = "leads"
         getMoreLeads("leads")
     }
 
     if (card_id == "claimed_card"){
+        current_page = "claimed"
         getMoreLeads("claimed")
     }
 
     if (card_id == "admin_card"){
+        current_page = "admin"
         getMoreLeads("admin")
     }
 

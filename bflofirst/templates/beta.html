@@ -54,7 +54,9 @@
                 <li onclick="showCard('admin_card')" class="nav_item admin_only" id="nav_admin_card"><a href="#!"><i
                         class="material-icons left">power_settings_new</i>Admin</a></li>
             </ul>
-
+        </div>
+    </nav>
+</div>
             <ul class="side-nav" id="mobile-demo">
                 <li>
                     <div class="userView">
@@ -90,12 +92,10 @@
                 </li>
             </ul>
 
-        </div>
-    </nav>
-</div>
 
-<!-- Lead Model -->
-<div id="lead_model" class="lead_model card horizontal col m12 l3" hidden>
+
+<!-- Lead Models -->
+<div id="tile_lead_model" class="lead_model card horizontal col m12 l3" hidden>
     <div class="card-stacked right-align">
         <div class="card-content">
             <p class="lead_label address truncate"></p>
@@ -198,6 +198,303 @@
         </div>
     </div>
 </div>
+<li id="list_lead_model" class="lead_node" hidden>
+    <div class="collapsible-header lead_collapsible blue lighten-2"><i class="material-icons">home</i></div>
+    <div class="collapsible-body">
+
+        <ul class="collapsible" data-collapsible="accordion">
+            <div class="edit-btn fixed-action-btn">
+                <a class="edit-btn btn-floating btn-large tooltipped" data-position="top" data-delay="50"
+                   data-tooltip="Update Lead">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+            </div>
+            <li>
+                <div class="row valign-wrapper">
+                    <div class="col s9 valign">
+                        <blockquote>
+                            <span class="address"></span><br>
+                            <span class="city"></span><br>
+                            <span class="date_created"></span><br>
+                            <span class="status"></span>
+                        </blockquote>
+                    </div>
+                    <div class="col s3 valign">
+                        <a class="claim_btn btn tooltipped waves-effect waves-light" data-position="top" data-delay="50"
+                           data-tooltip="Click to Claim"><i class="material-icons left">cloud</i>claim</a>
+                    </div>
+                </div>
+            </li>
+            <ul id="lead_detail_list_" class="collapsible" data-collapsible="accordion" hidden>
+                    <li class="admin_only">
+                        <div class="collapsible-header"><i class="material-icons">settings</i>Admin Panel</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="admin_only card col s12">
+                                    <div class="card-content">
+
+                                        <label for="claim_user">Claim User</label>
+                                        <input id="claim_user" type="text">
+
+                                        <label for="claim_datetime">Claim Date</label>
+                                        <input id="claim_datetime" type="text">
+
+                                        <label for="claimed">Claimed</label>
+                                        <input id="claimed" type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">speaker_notes</i>Property Info</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="admin_only card col s12">
+                                    <div class="card-content">
+                                        <div class="card col s12 l6">
+                                            <span class="card-title">Property Info</span>
+                                            <div class="card-content">
+
+                                                <label for="address">Address</label>
+                                                <input id="address" type="text">
+
+                                                <label for="city">City</label>
+                                                <input id="city" type="text">
+
+                                                <label for="zipcode">Zipcode</label>
+                                                <input id="zipcode" type="text">
+
+                                                <label for="date_created">Date Created</label>
+                                                <input id="date_created" type="text">
+
+                                                <label for="status">Status</label>
+                                                <input id="status" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="card col s12 l6">
+                                            <span class="card-title">Owner Info</span>
+                                            <div class="card-content">
+                                                <label for="owner_name">Name</label>
+                                                <input id="owner_name" type="text" value="">
+
+                                                <label for="owner_phone">Phone</label>
+                                                <input id="owner_phone" type="text" value="">
+
+                                                <label for="owner_address">Address</label>
+                                                <input id="owner_address" type="text" value="">
+
+                                                <label for="owner_city">City</label>
+                                                <input id="owner_city" type="text" value="">
+
+                                                <label for="owner_zipcode">Zipcode</label>
+                                                <input id="owner_zipcode" type="text" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">contact_phone</i>Lead Info</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="card-panel col s12">
+                                    <div class="input-field col s6">
+                                        <select id="phone_status">
+                                            <option value="not_checked">Not Checked</option>
+                                            <option value="not_found">Not Found</option>
+                                            <option value="not_verified">Not Verified</option>
+                                            <option value="left_message">Left Message</option>
+                                            <option value="nis">Not in Service</option>
+                                            <option value="wrong_number">Wrong Number</option>
+                                            <option value="verified">Verified</option>
+                                        </select>
+                                        <label>Phone Status</label>
+                                    </div>
+                                    <div class="col s6">
+                                        <input id="next_contact_date" type="date" class="datepicker">
+                                        <label>Follow-Up Date</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <textarea id="notes" class="materialize-textarea"></textarea>
+                                        <label for="notes">Notes</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">streetview</i>Google Maps</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="card-panel col s12">
+                                    <iframe style="width:100%; height: 450px" frameborder="0" style="border:0"
+                                            allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </ul>
+    </div>
+</li>
+
+<div id="hybrid_lead_model" class="lead_model card horizontal col m12 l3" hidden>
+        <div class="card-stacked right-align">
+        <div class="card-content">
+            <p class="lead_label address truncate"></p>
+            <p class="lead_label city truncate"></p>
+            <p class="lead_label date_created truncate"></p>
+        </div>
+        <div class="card-action right-align">
+            <a class="claim_btn btn tooltipped waves-effect waves-light" data-position="top" data-delay="50"
+               data-tooltip="Click to Claim"><i class="material-icons left">cloud</i>claim</a>
+        </div>
+    </div>
+
+    <div id="lead_modal" class="modal modal-fixed-footer">
+
+        <div class="modal-content">
+
+            <div class="edit-btn fixed-action-btn">
+                <a class="edit-btn btn-floating btn-large tooltipped" data-position="top" data-delay="50"
+                   data-tooltip="Update Lead">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+            </div>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="row valign-wrapper">
+                    <div class="col s9 valign">
+                        <blockquote>
+                            <span class="address"></span><br>
+                            <span class="city"></span><br>
+                            <span class="date_created"></span><br>
+                            <span class="status"></span>
+                        </blockquote>
+                    </div>
+                </div>
+            </li>
+            <ul id="lead_detail_list_" class="collapsible" data-collapsible="accordion">
+                    <li class="admin_only">
+                        <div class="collapsible-header"><i class="material-icons">settings</i>Admin Panel</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="admin_only card col s12">
+                                    <div class="card-content">
+
+                                        <label for="claim_user">Claim User</label>
+                                        <input id="claim_user" type="text">
+
+                                        <label for="claim_datetime">Claim Date</label>
+                                        <input id="claim_datetime" type="text">
+
+                                        <label for="claimed">Claimed</label>
+                                        <input id="claimed" type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">speaker_notes</i>Property Info</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="admin_only card col s12">
+                                    <div class="card-content">
+                                        <div class="card col s12 l6">
+                                            <span class="card-title">Property Info</span>
+                                            <div class="card-content">
+
+                                                <label for="address">Address</label>
+                                                <input id="address" type="text">
+
+                                                <label for="city">City</label>
+                                                <input id="city" type="text">
+
+                                                <label for="zipcode">Zipcode</label>
+                                                <input id="zipcode" type="text">
+
+                                                <label for="date_created">Date Created</label>
+                                                <input id="date_created" type="text">
+
+                                                <label for="status">Status</label>
+                                                <input id="status" type="text">
+
+                                            </div>
+                                        </div>
+                                        <div class="card col s12 l6">
+                                            <span class="card-title">Owner Info</span>
+                                            <div class="card-content">
+                                                <label for="owner_name">Name</label>
+                                                <input id="owner_name" type="text" value="">
+
+                                                <label for="owner_phone">Phone</label>
+                                                <input id="owner_phone" type="text" value="">
+
+                                                <label for="owner_address">Address</label>
+                                                <input id="owner_address" type="text" value="">
+
+                                                <label for="owner_city">City</label>
+                                                <input id="owner_city" type="text" value="">
+
+                                                <label for="owner_zipcode">Zipcode</label>
+                                                <input id="owner_zipcode" type="text" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">contact_phone</i>Lead Info</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="card-panel col s12">
+                                    <div class="input-field col s6">
+                                        <select id="phone_status">
+                                            <option value="not_checked">Not Checked</option>
+                                            <option value="not_found">Not Found</option>
+                                            <option value="sold">Relisted/Sold</option>
+                                            <option value="left_message">Left Message</option>
+                                            <option value="nis">Not in Service</option>
+                                            <option value="wrong_number">Wrong Number</option>
+                                            <option value="verified">Verified</option>
+                                        </select>
+                                        <label>Phone Status</label>
+                                    </div>
+                                    <div class="col s6">
+                                        <input id="next_contact_date" type="date" class="datepicker">
+                                        <label>Follow-Up Date</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <textarea id="notes" class="materialize-textarea"></textarea>
+                                        <label for="notes">Notes</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">streetview</i>Google Maps</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="card-panel col s12">
+                                    <iframe style="width:100%; height: 450px" frameborder="0" style="border:0"
+                                            allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </ul>
+            </div>
+    </div>
+</div>
 
 <!-- Master Container (i.e. MAIN)-->
 <main class="container lighten-2">
@@ -240,8 +537,8 @@
     <!-- LEADS -->
     <div id="lead_card" class="card-panel main-card" hidden>
 
-        <div class="row" id="lead_row">
-        </div>
+        <div class="row" id="lead_row"></div>
+        <!--ul id="lead_row" class="lead_row collapsible popout" data-collapsible="accordion"></ul-->
         <!-- Preloader -->
         <div class="modal-progress progress">
             <div class="indeterminate"></div>
@@ -390,133 +687,8 @@
 
     <!-- Admin -->
     <div id="admin_card" class="card-panel main-card" hidden>
-        <li id="admin_lead_model" hidden>
-            <div class="collapsible-header lead_collapsible blue lighten-2"><i class="material-icons">home</i></div>
-            <div class="collapsible-body">
-
-                <ul class="collapsible" data-collapsible="accordion">
-                    <div class="edit-btn fixed-action-btn">
-                        <a class="edit-btn btn-floating btn-large tooltipped" data-position="top" data-delay="50"
-                           data-tooltip="Update Lead">
-                            <i class="large material-icons">mode_edit</i>
-                        </a>
-                    </div>
-
-                    <li class="admin_only">
-                        <div class="collapsible-header"><i class="material-icons">settings</i>Admin Panel</div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="admin_only card col s12">
-                                    <div class="card-content">
-
-                                        <label for="claim_user">Claim User</label>
-                                        <input id="claim_user" type="text">
-
-                                        <label for="claim_datetime">Claim Date</label>
-                                        <input id="claim_datetime" type="text">
-
-                                        <label for="claimed">Claimed</label>
-                                        <input id="claimed" type="text">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">speaker_notes</i>Property Info</div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="admin_only card col s12">
-                                    <div class="card-content">
-                                        <div class="card col s12 l6">
-                                            <span class="card-title">Property Info</span>
-                                            <div class="card-content">
-
-                                                <label for="address">Address</label>
-                                                <input id="address" type="text">
-
-                                                <label for="city">City</label>
-                                                <input id="city" type="text">
-
-                                                <label for="zipcode">Zipcode</label>
-                                                <input id="zipcode" type="text">
-
-                                                <label for="date_created">Date Created</label>
-                                                <input id="date_created" type="text">
-
-                                                <label for="status">Status</label>
-                                                <input id="status" type="text">
-
-                                            </div>
-                                        </div>
-                                        <div class="card col s12 l6">
-                                            <span class="card-title">Owner Info</span>
-                                            <div class="card-content">
-                                                <label for="owner_name">Name</label>
-                                                <input id="owner_name" type="text" value="">
-
-                                                <label for="owner_phone">Phone</label>
-                                                <input id="owner_phone" type="text" value="">
-
-                                                <label for="owner_address">Address</label>
-                                                <input id="owner_address" type="text" value="">
-
-                                                <label for="owner_city">City</label>
-                                                <input id="owner_city" type="text" value="">
-
-                                                <label for="owner_zipcode">Zipcode</label>
-                                                <input id="owner_zipcode" type="text" value="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">contact_phone</i>Lead Info</div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="card-panel col s12">
-                                    <div class="input-field col s6">
-                                        <select id="phone_status">
-                                            <option value="not_checked">Not Checked</option>
-                                            <option value="not_found">Not Found</option>
-                                            <option value="not_verified">Not Verified</option>
-                                            <option value="left_message">Left Message</option>
-                                            <option value="nis">Not in Service</option>
-                                            <option value="wrong_number">Wrong Number</option>
-                                            <option value="verified">Verified</option>
-                                        </select>
-                                        <label>Phone Status</label>
-                                    </div>
-                                    <div class="col s6">
-                                        <input id="next_contact_date" type="date" class="datepicker">
-                                        <label>Follow-Up Date</label>
-                                    </div>
-                                    <div class="input-field col s12">
-                                        <textarea id="notes" class="materialize-textarea"></textarea>
-                                        <label for="notes">Notes</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><i class="material-icons">streetview</i>Google Maps</div>
-                        <div class="collapsible-body">
-                            <div class="row">
-                                <div class="card-panel col s12">
-                                    <iframe style="width:100%; height: 450px" frameborder="0" style="border:0"
-                                            allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <ul id="admin_row" class="lead_row collapsible popout" data-collapsible="accordion">
-        </ul>
+        <div class="row" id="admin_row"></div>
+        <!--ul id="admin_row" class="lead_row collapsible popout" data-collapsible="accordion"></ul-->
         <!-- Preloader -->
         <div class="modal-progress progress">
             <div class="indeterminate"></div>
@@ -568,6 +740,9 @@
             width: 32px;
             height: 32px;
           }
+
+
+
 
 
 
