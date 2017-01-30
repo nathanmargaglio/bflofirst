@@ -115,7 +115,8 @@ getLead = function(passed_data){
 
     lead_card.find('#claim_user_'+lead_id).val(data['claim_user']);
     lead_card.find('#claim_datetime_'+lead_id).val(data['claim_datetime']);
-    lead_card.find('#claimed_'+lead_id).val(data['claimed']);
+
+    $('#claimed_'+lead_id).prop( "checked" , data['claimed'])
 
     lead_card.find('#address_'+lead_id).val(data['address']);
     lead_card.find('#city_'+lead_id).val(data['city']);
@@ -147,7 +148,7 @@ getLead = function(passed_data){
 
             'claim_user':$('#claim_user_'+lead_id).val(),
             'claim_datetime':$('#claim_datetime_'+lead_id).val(),
-            'claimed':$('#claimed_'+lead_id).val(),
+            'claimed':$('#claimed_'+lead_id).prop( "checked" ),
 
             'address':$('#address_'+lead_id).val(),
             'city':$('#city_'+lead_id).val(),
@@ -220,10 +221,14 @@ appendLeads = function(leads, page_type="lead"){
         lead_row.find('.claim_btn').attr('data-id',lead_id)
 
         if (page_type=="lead"){
+            lead_row.find('.claim_btn').html('<i class="material-icons left">add_circle_outline</i>claim')
+            lead_row.find('.claim_btn').attr('data-tooltip','Click to Claim')
             lead_row.find('.claim_btn').click(function(){
                 claimButtonClick($(this).attr('data-id'))
             })
         }else{
+            lead_row.find('.claim_btn').html('<i class="material-icons left">cloud</i>Open')
+            lead_row.find('.claim_btn').attr('data-tooltip','Open Lead Details')
             lead_row.find('.claim_btn').click(function(){
                 $('#lead_modal_'+$(this).attr('data-id')).modal('open');
             });
