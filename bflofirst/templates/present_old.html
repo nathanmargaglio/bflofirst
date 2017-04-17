@@ -1,0 +1,117 @@
+<script type="text/javascript" src='/static/js/tabletop.js'></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<link href="/static/css/materialize.css?{{ range(100, 999) | random }}" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
+
+
+<style>
+    body {
+        background-image: url('static/img/bg.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1 0 auto;
+    }
+
+    .out_icon {
+        width: 32px;
+        height: 32px;
+    }
+
+
+</style>
+
+<main style="margin: 25px;">
+    <div class="card">
+        <div class="row">
+            <div class="card left-align col s8" style="margin: 12px;">
+                <span style="font-weight: 700; font-size: 64px; color: #42A5F5;" id="content-header"></span>
+            </div>
+            <div class="col s1"></div>
+            <img class="col s3" style="margin: 12px;"
+                 src="http://buffalofirstrealty.com/wp-content/uploads/2015/08/BFRG_logo_blue-e1439137795906.png">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card col s6" style="padding: 12px;">
+                <a class="btn" style="margin: 5px;">Listed</a>
+                <table class="striped">
+
+                    <tbody id="main-table">
+
+                    </tbody>
+                </table>
+        </div>
+
+            <div class="card col s6" style="padding: 12px;">
+                <a class="btn" style="margin: 5px;">Sold</a>
+                <table class="striped">
+
+                    <tbody id="alt-table">
+
+                    </tbody>
+                </table>
+            </div>
+    </div>
+
+</main>
+<script>
+    listing_sheet= 'https://docs.google.com/spreadsheets/d/1bCd-WeNj8UhvxoyRHxnoXh0gO-UXzbhOmEB1EaU-s8Y/pub?gid=0&single=true&output=csv';
+    closed_sheet= 'https://docs.google.com/spreadsheets/d/1bCd-WeNj8UhvxoyRHxnoXh0gO-UXzbhOmEB1EaU-s8Y/pub?gid=1912079607&single=true&output=csv';
+    function opened() {
+        Tabletop.init({
+            key: listing_sheet,
+            callback: function (ttdata, tabletop) {
+
+                data = ttdata['listings']['elements']
+                console.log(data)
+                $('#main-table').html("")
+                head = data[0]['header']
+                $('#content-header').html(head)
+                mess = data[0]['message']
+                $('#content-message').html(mess)
+
+                bfds_logo = '<img src="/static/favicon.ico" height="24" width="24"> &nbsp;'
+
+                for (i = 0; i < data.length; i++) {
+                    if (data[i]['listing'][0] == "*"){
+                        address_cell = bfds_logo + data[i]['listing'].substring(1)
+                    }else{
+                        address_cell = data[i]['listing']
+                    }
+                    entry = "<tr>"
+                    entry += "<td>" + data[i]['date'] + "</td>"
+                    entry += "<td>" + address_cell + "</td>"
+                    entry += "<td>" + data[i]['price'] + "</td>"
+                    entry += "</tr>"
+
+                    $('#main-table').append(entry)
+                }
+
+                data = ttdata['closed']['elements']
+                $('#alt-table').html("")
+
+                for (i = 0; i < data.length; i++) {
+                    entry = "<tr>"
+                    entry += "<td>" + data[i]['date'] + "</td>"
+                    entry += "<td>" + data[i]['listing'] + "</td>"
+                    entry += "<td>" + data[i]['price'] + "</td>"
+                    entry += "</tr>"
+
+                    $('#alt-table').append(entry)
+                }
+            }
+        })
+    }
+
+    window.setInterval(function () {
+        opened();
+    }, 1000);
+</script>

@@ -3,6 +3,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>BFLO DS</title>
+
     <!-- jQuery -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -15,6 +17,7 @@
     <!-- BFDS -->
     <link href="/static/css/jalendar.css" rel="stylesheet">
     <script type="text/javascript" src='/static/js/jalendar.js'></script>
+    <script type="text/javascript" src='/static/js/moment.js'></script>
     <!--link href="/static/css/main.css?{{ range(100, 999) | random }}" rel="stylesheet"-->
 
     <!-- Material Design -->
@@ -31,6 +34,7 @@
 <!-- Used to determine if the current user is an admin or not -->
 <!-- Don't judge me -->
 <div id="admin_rights" class="{{admin}}" hidden>This class will be true if admin otherwise false.</div>
+<div id="mod_rights" class="{{moderator}}" hidden>This class will be true if admin otherwise false.</div>
 
 <!-- HEADER -->
 <div class="navbar-fixed">
@@ -57,46 +61,226 @@
         </div>
     </nav>
 </div>
-            <ul class="side-nav" id="mobile-demo">
-                <li>
-                    <div class="userView">
-                        <div class="background">
-                            <img src="https://8d27d447d6c7bede7903-00fcdfda3fe26e81b0d2b3887b22d582.ssl.cf1.rackcdn.com/files/images/buffalo-ny-ttc-city-page.jpg">
-                        </div>
-                        <a href="#!user"><img class="circle"
-                                              src="https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAaHAAAAJDhmM2IyMTkyLTc1YTgtNDEyMy05OTU3LTU5MDU0MjAwMWVhMQ.png"></a>
-                        <a href="#!name"><span class="white-text name">Buffalo First</span></a>
-                        <a href="#!email"><span class="white-text email">nathanmargaglio@gmail.com</span></a>
-                    </div>
-                </li>
+<ul class="side-nav" id="mobile-demo">
+    <li>
+        <div class="userView">
+            <div class="background">
+                <img src="https://8d27d447d6c7bede7903-00fcdfda3fe26e81b0d2b3887b22d582.ssl.cf1.rackcdn.com/files/images/buffalo-ny-ttc-city-page.jpg">
+            </div>
+            <a href="#!user"><img class="circle"
+                                  src="https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAaHAAAAJDhmM2IyMTkyLTc1YTgtNDEyMy05OTU3LTU5MDU0MjAwMWVhMQ.png"></a>
+            <a href="#!name"><span class="white-text name">Buffalo First</span></a>
+            <a href="#!email"><span class="white-text email">nathanmargaglio@gmail.com</span></a>
+        </div>
+    </li>
 
-                <li onclick="showCard('home_card')"><a href="#!"><i class="material-icons">account_circle</i>Home</a>
-                </li>
-                <li>
-                    <div class="divider"></div>
-                </li>
-                <li onclick="showCard('lead_card')"><a href="#!"><i class="material-icons">alarm</i>Leads</a></li>
-                <li>
-                    <div class="divider"></div>
-                </li>
-                <li onclick="showCard('claimed_card')"><a href="#!"><i
-                        class="material-icons">announcement</i>Claimed</a></li>
-                <li>
-                    <div class="divider"></div>
-                </li>
-                <li onclick="showCard('update_card')"><a href="#!"><i class="material-icons">cloud</i>Updates</a></li>
-                <li>
-                    <div class="divider"></div>
-                </li>
-                <li class="admin_only" onclick="showCard('admin_card')"><a href="#!"><i class="material-icons left">power_settings_new</i>Admin</a>
-                </li>
-            </ul>
-
-
+    <li onclick="showCard('home_card')"><a href="#!"><i class="material-icons">account_circle</i>Home</a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li onclick="showCard('lead_card')"><a href="#!"><i class="material-icons">alarm</i>Leads</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li onclick="showCard('claimed_card')"><a href="#!"><i
+            class="material-icons">announcement</i>Claimed</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li onclick="showCard('update_card')"><a href="#!"><i class="material-icons">cloud</i>Updates</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li class="admin_only" onclick="showCard('admin_card')"><a href="#!"><i class="material-icons left">power_settings_new</i>Admin</a>
+    </li>
+</ul>
 
 <!-- Lead Model -->
-<div id="hybrid_lead_model" class="lead_model card horizontal col m12 l3" hidden>
-        <div class="card-stacked right-align">
+<li id="hybrid_lead_model" class="lead_model collection_item" hidden>
+    <div class="card">
+        <div class="row valign-wrapper">
+            <div class="col s9 row valign-wrapper">
+                <div class="info_icon" style="cursor: help;">
+                    <i class="material-icons valign tooltipped" style="font-size: 64px;" data-position="top" data-delay="50"
+                       data-tooltip="Recently Expired">history</i>
+                    <img class="tooltipped" style="display: none; padding: 10px;" width="64" height="64" src="static/img/fb-art.png"
+                         data-position="top" data-delay="50" data-tooltip="Facebook Lead">
+                </div>
+                <blockquote class="col s11">
+                    <span class="lead_label address truncate"></span>
+                    <span class="lead_label city truncate"></span>
+                    <span class="lead_label date_created truncate"></span>
+                    <span class="lead_label phone_status truncate"></span>
+                </blockquote>
+            </div>
+            <div class="col s3 valign">
+                <a class="claim_btn btn tooltipped waves-effect waves-light" data-position="top" data-delay="50"></a>
+            </div>
+        </div>
+
+        <div id="lead_modal" class="modal modal-fixed-footer">
+
+            <div class="modal-content">
+
+                <div class="edit-btn fixed-action-btn">
+                    <a class="edit-btn btn-floating btn-large tooltipped" data-position="top" data-delay="50"
+                       data-tooltip="Update Lead">
+                        <i class="large material-icons">save</i>
+                    </a>
+                </div>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="row valign-wrapper">
+                            <div class="col s9 valign">
+                                <blockquote>
+                                    <span class="address"></span><br>
+                                    <span class="city"></span><br>
+                                    <span class="date_created"></span><br>
+                                    <span class="status"></span>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </li>
+                    <ul id="lead_detail_list_" class="collapsible" data-collapsible="accordion">
+                        <li class="admin_only">
+                            <div class="collapsible-header"><i class="material-icons">settings</i>Admin Panel</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="admin_only card col s12">
+                                        <div class="card-content">
+
+                                            <label for="claim_user">Claim User</label>
+                                            <input id="claim_user" type="text">
+
+                                            <label for="claim_datetime">Claim Date</label>
+                                            <input id="claim_datetime" type="text">
+
+                                            <input type="checkbox" class="filled-in" id="claimed"/>
+                                            <label for="claimed">Claimed</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">speaker_notes</i>Property Info
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="card col s12">
+                                        <div class="card-content">
+                                            <div class="card col s12 l6">
+                                                <span class="card-title">Property Info</span>
+                                                <div class="card-content">
+
+                                                    <label for="address">Address</label>
+                                                    <input id="address" type="text">
+
+                                                    <label for="city">City</label>
+                                                    <input id="city" type="text">
+
+                                                    <label for="zipcode">Zipcode</label>
+                                                    <input id="zipcode" type="text">
+
+                                                    <label for="date_created">Date Created</label>
+                                                    <input id="date_created" type="text" readonly>
+
+                                                </div>
+                                            </div>
+                                            <div class="card col s12 l6">
+                                                <span class="card-title">Owner Info</span>
+                                                <div class="card-content">
+                                                    <label for="owner_name">Name</label>
+                                                    <input id="owner_name" type="text" value="">
+
+                                                    <label for="owner_phone">Phone</label>
+                                                    <input id="owner_phone" type="text" value="">
+
+                                                    <label for="owner_email">Email</label>
+                                                    <input id="owner_email" type="text" value="">
+
+                                                    <label for="owner_address">Address</label>
+                                                    <input id="owner_address" type="text" value="">
+
+                                                    <label for="owner_city">City</label>
+                                                    <input id="owner_city" type="text" value="">
+
+                                                    <label for="owner_zipcode">Zipcode</label>
+                                                    <input id="owner_zipcode" type="text" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">contact_phone</i>Lead Info</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="card-panel col s12">
+
+                                        <div class="input-field col s9">
+                                            <label for="expire_date">Lead Expiration</label>
+                                            <input id="expire_date" type="text" readonly>
+                                        </div>
+                                        <div class="input-field col s3">
+                                            <a class="renew-btn waves-effect waves-light btn">renew</a>
+                                        </div>
+
+                                        <div class="input-field col s12 m6">
+                                            <select id="phone_status">
+                                                <option value="not_checked">Not Checked</option>
+                                                <option value="not_found">Not Found</option>
+                                                <option value="left_message">Left Message</option>
+                                                <option value="nis">NIS/Wrong Number</option>
+                                                <option value="verified">Verified</option>
+                                            </select>
+                                            <label>Phone Status</label>
+                                        </div>
+
+                                        <div class="input-field col s12 m6">
+                                            <select id="status">
+                                                <option value="live">Live (Keep On List)</option>
+                                                <option value="dead">Dead (Remove From List)</option>
+                                            </select>
+                                            <label>Lead Status</label>
+                                        </div>
+
+                                        <div class="col s12">
+                                            <input id="next_contact_date" type="date" class="datepicker">
+                                            <label for="next_contact_date">Follow-Up Date</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea id="notes" class="materialize-textarea"></textarea>
+                                            <label for="notes">Notes</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">streetview</i>Google Maps</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="card-panel col s12">
+                                        <iframe style="width:100%; height: 450px" frameborder="0" style="border:0"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+</li>
+
+<!--div id="hybrid_lead_model" class="lead_model card horizontal col m12 l3" hidden>
+    <div class="card-stacked right-align">
         <div class="card-content">
             <p class="lead_label address truncate"></p>
             <p class="lead_label city truncate"></p>
@@ -117,20 +301,20 @@
                     <i class="large material-icons">mode_edit</i>
                 </a>
             </div>
-        <ul class="collapsible" data-collapsible="accordion">
-            <li>
-                <div class="row valign-wrapper">
-                    <div class="col s9 valign">
-                        <blockquote>
-                            <span class="address"></span><br>
-                            <span class="city"></span><br>
-                            <span class="date_created"></span><br>
-                            <span class="status"></span>
-                        </blockquote>
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="row valign-wrapper">
+                        <div class="col s9 valign">
+                            <blockquote>
+                                <span class="address"></span><br>
+                                <span class="city"></span><br>
+                                <span class="date_created"></span><br>
+                                <span class="status"></span>
+                            </blockquote>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <ul id="lead_detail_list_" class="collapsible" data-collapsible="accordion">
+                </li>
+                <ul id="lead_detail_list_" class="collapsible" data-collapsible="accordion">
                     <li class="admin_only">
                         <div class="collapsible-header"><i class="material-icons">settings</i>Admin Panel</div>
                         <div class="collapsible-body">
@@ -241,15 +425,14 @@
                             </div>
                         </div>
                     </li>
-                </div>
-            </ul>
+        </div>
         </ul>
-            </div>
+        </ul>
     </div>
-</div>
+</div-->
 
 <!-- Master Container (i.e. MAIN)-->
-<main class="lighten-2">
+<main class="container lighten-2">
 
     <!-- HOME -->
     <div id="home_card" class="card-panel main-card">
@@ -268,6 +451,19 @@
                 Contact me, Nathan Margaglio, with any questions, bugs, or comments.<br>
                 nathanmargaglio@gmail.com
             </blockquote>
+
+            <div id="naked_modal" style="width: 75%; height: 75%;" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <h4 id="naked_header">Expired Today</h4>
+                    <ul id="naked_collection" class="collection">
+                    </ul>
+                </div>
+                <div class="modal-footer row">
+                        <input type="date" class="datepicker col s6" id="naked_date">
+                        <a href="#!" class="modal-action col s6 modal-close waves-effect waves-green btn-flat ">Done</a>
+                </div>
+            </div>
+            <a class="waves-effect waves-light btn modal-trigger mod_only" href="#naked_modal">View ALL Parcels</a>
         </div>
 
         <div class="row">
@@ -289,19 +485,28 @@
     <!-- LEADS -->
     <div id="lead_card" class="card-panel main-card" hidden>
 
-        <div class="row" id="lead_row"></div>
-        <!--ul id="lead_row" class="lead_row collapsible popout" data-collapsible="accordion"></ul-->
+        <!--div class="row" id="lead_row"></div-->
+        <ul id="lead_row" class="lead_row collection"></ul>
         <!-- Preloader -->
         <div class="modal-progress progress">
             <div class="indeterminate"></div>
         </div>
         <a class="btn-floating btn-large waves-effect waves-light right tooltipped" onclick="getMoreLeads('leads')"
            data-position="top" data-delay="50" data-tooltip="Click for more Leads"><i class="material-icons">add</i></a>
+
+        <a class="btn-floating btn-large waves-effect waves-light red" onclick="setQueryDate()"><i class="material-icons">date_range</i></a>
+
+        <div class="row" id="set_date" hidden>
+            <input id="after_date" type="date" class="datepicker col s2">
+            <span class="col s1">to</span>
+            <input id="before_date" type="date" class="datepicker col s2">
+        </div>
     </div>
 
     <!-- CLAIMED -->
     <div id="claimed_card" class="card-panel main-card" hidden>
-        <div class="row" id="claimed_row"></div>
+        <!-- div class="row" id="claimed_row"></div -->
+        <ul id="claimed_row" class="lead_row collection"></ul>
         <!-- Preloader -->
         <div class="modal-progress progress">
             <div class="indeterminate"></div>
@@ -314,133 +519,20 @@
     <!-- UPDATES -->
     <div id="update_card" class="card-panel main-card" hidden>
         <div class="row">
-            <a href="#" data-activates="slide-out" class="carousel-fixed-item button-collapse col s1"><i
-                    class="material-icons">menu</i></a>
-        </div>
-        <div class="row">
-            <div class="jalendar col s12"></div>
-        </div>
-        <div class="row">
-            <a href="#" class="col s1"><i class="material-icons">chevron_left</i></a>
-            <a href="#" class="col s1"><i class="material-icons">chevron_right</i></a>
-        </div>
-        <div class="row" id="update_row_1">
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                        <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50"
-                                data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i
-                                class="material-icons left">cloud</i>claim
-                        </button>
-                    </div>
-                </div>
-
-                <div id="update_modal_0x0" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat"
-                           onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
+            <div class="jalendar col s12">
+                <div class="added-event" data-link="http://google.com" data-date="19-02-2017"
+                     data-title="WWDC 13 on San Francisco, LA"></div>
             </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                        <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50"
-                                data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i
-                                class="material-icons left">cloud</i>claim
-                        </button>
-                    </div>
-                </div>
-
-                <div id="update_modal_0x1" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat"
-                           onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                        <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50"
-                                data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i
-                                class="material-icons left">cloud</i>claim
-                        </button>
-                    </div>
-                </div>
-
-                <div id="update_modal_0x2" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat"
-                           onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card horizontal col s12 m3">
-                <div class="card-stacked right-align">
-                    <div class="card-content">
-                        <p class="priority_label">0</p>
-                        <p class="date_label">Oct 3</p>
-                        <p class="address_label">123 Fake St</p>
-                    </div>
-                    <div class="card-action right-align">
-                        <button class="waves-effect waves-light tooltipped btn" data-position="top" data-delay="50"
-                                data-tooltip="Claim this Lead!" data-target="update_modal_0x0"><i
-                                class="material-icons left">cloud</i>claim
-                        </button>
-                    </div>
-                </div>
-
-                <div id="update_modal_0x3" class="modal">
-                    <div class="modal-content">
-                        <h4>Lead</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="modal-action modal-close waves-effect waves-green btn-flat"
-                           onclick="Materialize.toast('Lead added to Claimed.', 4000)">Close</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <ul id="update_row" class="lead_row collection"></ul>
+
     </div>
 
     <!-- Admin -->
     <div id="admin_card" class="card-panel main-card" hidden>
-        <div class="row" id="admin_row"></div>
-        <!--ul id="admin_row" class="lead_row collapsible popout" data-collapsible="accordion"></ul-->
+        <!--div class="row" id="admin_row"></div-->
+        <ul id="admin_row" class="lead_row collection"></ul>
         <!-- Preloader -->
         <div class="modal-progress progress">
             <div class="indeterminate"></div>
@@ -477,29 +569,23 @@
 
 </body>
 <style>
-        body {
-            background-image: url('static/img/bg.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-          }
-          main {
-            flex: 1 0 auto;
-          }
-          .out_icon{
-            width: 32px;
-            height: 32px;
-          }
+    body {
+        background-image: url('static/img/bg.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
 
+    main {
+        flex: 1 0 auto;
+    }
 
-
-
-
-
-
-
+    .out_icon {
+        width: 32px;
+        height: 32px;
+    }
 
 
 </style>

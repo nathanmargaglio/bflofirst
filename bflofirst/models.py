@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 import string
+import sys
 
 if __name__ == "__main__":
     from flask_script import Manager
@@ -18,13 +19,24 @@ if __name__ == "__main__":
     app.config['SECRET_KEY'] = "secret"
     app.config['SERVER_NAME'] = 'localhost:8080'
     app.config[
-        'SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3307/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
+        'SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3306/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = False
 else:
     db = SQLAlchemy()
 
+app = Flask(__name__)
+db = SQLAlchemy(app)
+db.init_app(app)
+
+app.config['SECRET_KEY'] = "secret"
+app.config['SERVER_NAME'] = 'localhost:8080'
+app.config[
+    'SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3306/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = False
 
 class Parcel(db.Model):
     # Parcel information obtainable via Erie County Parcel Search
@@ -46,9 +58,9 @@ class Parcel(db.Model):
     mailing_address = db.Column(db.String(128), default="")
     property_class = db.Column(db.String(128), default="")
     line_2 = db.Column(db.String(128), default="")
-    assessment = db.Column(db.String(128), default="")
+    assessment = db.Column(db.Integer, default="")
     line_3 = db.Column(db.String(128), default="")
-    taxable = db.Column(db.String(128), default="")
+    taxable = db.Column(db.Integer, default="")
     street = db.Column(db.String(128), default="")
     desc = db.Column(db.String(128), default="")
     city_state = db.Column(db.String(128), default="")
@@ -56,34 +68,27 @@ class Parcel(db.Model):
     zip = db.Column(db.String(128), default="")
     deed_book = db.Column(db.String(128), default="")
     deed_page = db.Column(db.String(128), default="")
-    frontage = db.Column(db.String(128), default="")
-    depth = db.Column(db.String(128), default="")
-    acres = db.Column(db.String(128), default="")
-    year_built = db.Column(db.String(128), default="")
-    square_ft = db.Column(db.String(128), default="")
-    beds = db.Column(db.String(128), default="")
-    baths = db.Column(db.String(128), default="")
-    fireplace = db.Column(db.String(128), default="")
+
+    frontage = db.Column(db.Integer, default="")
+    depth = db.Column(db.Integer, default="")
+    acres = db.Column(db.Integer, default="")
+    year_built = db.Column(db.Integer, default="")
+    square_ft = db.Column(db.Integer, default="")
+    beds = db.Column(db.Float, default="")
+    baths = db.Column(db.Float, default="")
+    fireplace = db.Column(db.Float, default="")
     school = db.Column(db.String(128), default="")
 
     parcel_url = db.Column(db.String(128), default="")
     parcel_history_url = db.Column(db.String(128), default="")
     # parcel_history = db.relationship('Parcel_History', backref=db.backref('parcel', lazy='dynamic'))
 
-    def __init__(self):
-        self.beds = '9'
-
     def __repr__(self):
         return str(self.property_location)
 
     def setdic(self, data):
-        for k in data:
-            try:
-                setattr(self, k, data[k])
-            except:
-                pass
-        db.add(self)
-        db.commit()
+        for k, v in data.items():
+            setattr(self, k, data[k])
         return self
 
     def getdic(self):
@@ -180,6 +185,7 @@ class Listing(db.Model):
     o1fn = db.Column(db.String(128), nullable=True)
     o1ln = db.Column(db.String(128), nullable=True)
     o1mi = db.Column(db.String(128), nullable=True)
+    phone_number = db.Column(db.String(128), nullable=True)
     # checked_yp = db.Column(db.Boolean, default=False)
     # o1phone = db.relationship('PhoneNumber', backref='owner', lazy='dynamic')
 
@@ -275,6 +281,10 @@ class Listing(db.Model):
     def __repr__(self):
         return str(self.ml)
 
+fb_ads = db.Table('fb_ads',
+                  db.Column('email', db.String(64), db.ForeignKey('users.email')),
+                  db.Column('id', db.Integer, db.ForeignKey('facebook_ad.id'))
+                  )
 
 class User(db.Model):
     __tablename__ = "users"
@@ -283,6 +293,7 @@ class User(db.Model):
     admin = db.Column(db.Boolean, default=False)
     authenticated = db.Column(db.Boolean, default=False)
     unfinished_lead = db.Column(db.Boolean, default=False)
+    fb_ad = db.relationship('FacebookAd', secondary=fb_ads, backref=db.backref('users', lazy='dynamic'))
 
     def set_email(self, email):
         self.email = email
@@ -312,6 +323,11 @@ class User(db.Model):
         """False, as anonymous users aren't supported."""
         return False
 
+class FacebookAd(db.Model):
+    __tablename__ = "facebook_ad"
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    fb_id = db.Column(db.String(128), nullable=True)
+    #leads = db.relationship('Lead', secondary=fb_leads, backref=db.backref(''))
 
 class FacebookLead(db.Model):
     __tablename__ = "facebook_lead"
@@ -445,16 +461,29 @@ class Lead(db.Model):
     # Lead Info
     notes = db.Column(db.String(512), nullable=True)
     priority = db.Column(db.Float, default=0)
-    status = db.Column(db.String(128), nullable=True)
+    status = db.Column(db.String(128), default='live')
     mail_status = db.Column(db.Boolean, default=False)
     phone_status = db.Column(db.String(128), nullable=True)
     claimed = db.Column(db.Boolean, default=False)
     claim_user = db.Column(db.String(128), nullable=True)
     claim_datetime = db.Column(db.DateTime, nullable=True)
     next_contact_date = db.Column(db.DateTime, nullable=True)
+    expire_date = db.Column(db.DateTime, nullable=True)
 
     def __init__(self):
         self.date_created = datetime.datetime.now()
+        self.phone_status = 'pre_lookup'
+
+    def push_expire_date(self, days=1, date=None):
+        if date:
+            self.expire_date = date
+        elif self.expire_date:
+            self.expire_date += datetime.timedelta(days=days)
+        else:
+            self.expire_date = datetime.datetime.now() + datetime.timedelta(days=days)
+
+        self.expire_date = self.expire_date.replace(hour=11)
+        print("Exp:",self.expire_date)
 
     def update(self, fields):
         data = {}
@@ -463,6 +492,7 @@ class Lead(db.Model):
             data['id'] = self.id
         except:
             pass
+
         try:
             data['date_created'] = self.date_created
         except:
@@ -490,6 +520,7 @@ class Lead(db.Model):
         data['claim_user'] = self.claim_user
         data['claim_datetime'] = self.claim_datetime
         data['next_contact_date'] = self.next_contact_date
+        data['expire_date'] = self.expire_date
 
         if fields:
             for k in fields:
@@ -511,6 +542,7 @@ class Lead(db.Model):
 
         self.notes = data['notes']
         self.claim_user = data['claim_user']
+
         try:
             self.priority = float(data['priority'])
         except:
@@ -531,13 +563,27 @@ class Lead(db.Model):
 
         try:
             string_datetime = data['claim_datetime']
-            self.self.claim_datetime = datetime.datetime.strptime(string_datetime, "%Y-%m-%d %H:%M:%S.%f")
+            self.claim_datetime = datetime.datetime.strptime(string_datetime, "%Y-%m-%d")
+        except:
+            pass
+
+        try:
+            string_datetime = data['date_created']
+            if string_datetime != self.date_created:
+                self.date_created = datetime.datetime.strptime(string_datetime, "%Y-%m-%d")
         except:
             pass
 
         try:
             string_datetime = data['next_contact_date']
-            self.next_contact_date = datetime.datetime.strptime(string_datetime, "%m/%d/%Y")
+            self.next_contact_date = datetime.datetime.strptime(string_datetime, "%Y-%m-%d").replace(hour=11)
+            self.push_expire_date(date=self.next_contact_date + datetime.timedelta(days=1))
+        except:
+            pass
+
+        try:
+            string_datetime = data['expire_date']
+            self.expire_date = datetime.datetime.strptime(string_datetime, "%Y-%m-%d").replace(hour=11)
         except:
             pass
 
@@ -549,6 +595,7 @@ class Lead(db.Model):
         self.claim_user = attempting_user
         self.claim_datetime = datetime.datetime.now()
         self.claimed = True
+        self.push_expire_date()
 
         user_model.unfinished_lead = True
         db.session.add(user_model)
@@ -579,15 +626,15 @@ class Lead(db.Model):
         data['claimed'] = self.claimed
         data['claim_user'] = self.claim_user
         data['claim_datetime'] = self.claim_datetime
-        try:
-            data['next_contact_date'] = self.next_contact_date.strftime('%x')
-        except:
-            data['next_contact_date'] = self.next_contact_date
+        data['next_contact_date'] = self.next_contact_date
+        data['expire_date'] = self.expire_date
 
         return data
 
 
 if __name__ == "__main__":
+    db.create_all()
+
     """
     com = ""
     while com != "!exit":
@@ -597,9 +644,10 @@ if __name__ == "__main__":
                 print i
         except Exception as e:
             print e
-    """
+
     migrate = Migrate(app, db)
     manager = Manager(app)
 
     manager.add_command('db', MigrateCommand)
     manager.run()
+    """

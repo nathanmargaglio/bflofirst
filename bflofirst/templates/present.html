@@ -1,0 +1,128 @@
+<script type="text/javascript" src='/static/js/tabletop.js'></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<link href="/static/css/materialize.css?{{ range(100, 999) | random }}" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto" rel="stylesheet">
+
+
+<style>
+    body {
+        background-image: url('static/img/bg.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1 0 auto;
+    }
+
+    .carousel-slider {
+    height: 500px !important;
+}
+
+</style>
+
+<main>
+    <div class="card">
+        <div class="row">
+            <div class="card left-align col s8" style="margin: 12px;">
+                <span style="font-weight: 700; font-size: 64px; color: #42A5F5;" id="content-header"></span>
+            </div>
+            <div class="col s1"></div>
+            <img class="col s3" style="margin: 12px;"
+                 src="http://buffalofirstrealty.com/wp-content/uploads/2015/08/BFRG_logo_blue-e1439137795906.png">
+        </div>
+    </div>
+
+    <div class="carousel carousel-slider" id="main-slider">
+
+        <!--div class="carousel-item card">
+            <div class="card" style="margin: 20px;">
+                    <span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">K. Smith</span><br>
+                    <span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">16 Woltz Ave</span><br>
+                    <span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">$199,999</span>
+            </div>
+        </div-->
+
+    </div>
+
+</main>
+<script>
+    listing_sheet = 'https://docs.google.com/spreadsheets/d/1bCd-WeNj8UhvxoyRHxnoXh0gO-UXzbhOmEB1EaU-s8Y/pub?gid=0&single=true&output=csv';
+    closed_sheet = 'https://docs.google.com/spreadsheets/d/1bCd-WeNj8UhvxoyRHxnoXh0gO-UXzbhOmEB1EaU-s8Y/pub?gid=1912079607&single=true&output=csv';
+
+    function opened() {
+        Tabletop.init({
+            key: listing_sheet,
+            callback: function (ttdata, tabletop) {
+
+                data = ttdata['listings']['elements']
+                console.log(data)
+                $('#main-table').html("")
+                head = data[0]['header']
+                $('#content-header').html(head)
+                mess = data[0]['message']
+                $('#content-message').html(mess)
+
+                bfds_logo = '<img src="/static/favicon.ico" style="height: 48px; width: 48px !important"> &nbsp;'
+
+                for (i = 0; i < data.length; i++) {
+
+                    entry = '<div class="carousel-item card">'
+                    entry += '<div class="card" style="margin: 20px;">'
+                    entry += '<span style="font-weight: 700; font-size: 48px; color: #42A5F5; margin: 20px; text-decoration: underline;">LISTED</span><br>'
+
+                    entry += '<span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">' + data[i]['date'] + '</span><br>'
+
+                    entry += '<span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">' + data[i]['listing'].substring(1) + '</span>'
+                    if (data[i]['listing'][0] == "*") {
+                        entry += bfds_logo
+                    }
+                    entry += '<br>'
+                    entry += '<span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">' + data[i]['price'] + '</span><br>'
+
+                    entry += "</div>"
+                    entry += '</div>'
+
+                    $('#main-slider').append(entry)
+                }
+
+                data = ttdata['closed']['elements']
+                for (i = 0; i < data.length; i++) {
+
+                    entry = '<div class="carousel-item card">'
+                    entry += '<div class="card" style="margin: 20px;">'
+
+                    entry += '<span style="font-weight: 700; font-size: 48px; color: #42A5F5; margin: 20px; text-decoration: underline;">SOLD</span><br>'
+                    entry += '<span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">' + data[i]['date'] + '</span><br>'
+
+                    entry += '<span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">' + data[i]['listing'].substring(1) + '</span>'
+                    if (data[i]['listing'][0] == "*") {
+                        entry += bfds_logo
+                    }
+                    entry += '<br>'
+                    entry += '<span style="font-weight: 700; font-size: 64px; color: #42A5F5; margin: 20px;">' + data[i]['price'] + '</span><br>'
+
+                    entry += "</div>"
+                    entry += '</div>'
+
+                    $('#main-slider').append(entry)
+                }
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        opened();
+        setTimeout(function() {
+            $('.carousel.carousel-slider').carousel({full_width: true})
+        }, 5000);
+    });
+
+    window.setInterval(function () {
+        $('.carousel').carousel('next');
+    }, 5000);
+</script>

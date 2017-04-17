@@ -23,7 +23,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:margaglio22@/bflof
 
 if dev_mode():
     app.config['SERVER_NAME'] = 'localhost:8080'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3307/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3306/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = False
@@ -62,11 +62,19 @@ def after_request(r):
 def index():
     return redirect(url_for('api.beta_page'))
 
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
+
 @app.route('/alpha', methods=['GET', 'POST'])
 @login_required
 def index_alpha():
     flash("You are logged in as {}".format(current_user.email))
     return render_template("index_b.html")
+
+@app.route('/present', methods=['GET', 'POST'])
+def presentation():
+    return render_template("present.html")
 
 @app.route('/tax_records', methods=['GET','POST'])
 def tax_records():
@@ -303,7 +311,7 @@ def expires():
     if not page:
         page = 0
 
-    working_list = Listing.query.join(Owner)
+    working_list = Listing.query#.join(Owner)
 
     cont_params = ""
 
@@ -312,7 +320,8 @@ def expires():
         cont_params += "&expired="+request.args.get('expired')
 
     if request.args.get('phone'):
-        working_list = working_list.filter(Owner.phone != None)
+        #working_list = working_list.filter(Owner.phone != None)
+        working_list = working_list.filter(Listing.notes != '')
         cont_params += "&phone="+request.args.get('phone')
 
     if request.args.get('locality'):

@@ -115,7 +115,7 @@
                                                 <td class="text-left">{{i['Town/City']}}</td>
                                                 <td class="text-left">{{i['Owner 1 First Name'] + " " + i['Owner 1 Last Name']}}</td>
                                                 <td class="text-left">{{i['Expiration Date']}}</td>
-                                                <td class="text-left"><a href="http://people.yellowpages.com/whitepages/address?street={{i['Address']}}&qloc={{i['Town/City']}}+ny">YP</a></td>
+                                                <td class="text-left">{{i.phone_number}}</td>
                                                 <!-- Checked Status -->
                                                 <td class="text-left"> {% if 1==0 %}
                                                     <input type="checkbox" id="i.owner_id" name="result" value="true" checked="">{% else %}

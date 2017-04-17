@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-import crawler
+# import crawler
 import pandas as pd
 import time, re, os, requests
 import datetime
+from config import local_cities
 
-from models import Listing, User, Owner, Parcel, Log, Chat
+from models import Listing, User, Owner, Parcel, Log, Chat, Lead
 
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
@@ -18,7 +19,7 @@ def init_app(app):
     app.config.from_pyfile('config.py')
     app.config['SECRET_KEY'] = "secret"
     app.config['SERVER_NAME'] = 'localhost:8080'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3307/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:margaglio22@127.0.0.1:3306/bflofirstdb?unix_socket=/cloudsql/bravofoxtrot-141119:us-central1:bflofirstdb'
     
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = False
@@ -81,23 +82,19 @@ def remove_duplicates():
         print n/float(len(ls))
             
 # YellowPages
-def parser(owner):
+def parser(db, listing):
     url = "http://people.yellowpages.com/whitepages?first={}&last={}&zip={}&state=ny"
     re_address = """<div class="address">\n(.*?)<"""
     re_phone = """<div class="phone">\n(.*?)<"""
 
-    first = owner.first
-    last = owner.last
-    parcel = owner.parcels.first()
-    if parcel == None:
-        print "No Parcel Association"
-        return 0
-    zipcode = parcel.owner_zip
-    ostreet = str(parcel.owner_street).split(' ')[0]
-    pstreet = str(parcel.prop_location).split(' ')[0]
+    first = listing.o1fn
+    last = listing.o1ln
 
-    street = pstreet
-    
+    if listing.ozip:
+        zipcode = listing.ozip
+    else:
+        zipcode = listing.zipc
+
     time.sleep(2)
     r = requests.get(url.format(first, last, zipcode))
         
@@ -105,33 +102,64 @@ def parser(owner):
     phones = re.findall(re_phone, r.text)
     results = zip(addresses, phones)
     for n in results:
-        if street == n[0].lstrip().rstrip().split(' ')[0]:
+        print "Res: " + n[0].lstrip().rstrip().split(' ')[0]
+        print "List: " + str(listing.stnum)
+        if str(listing.stnum) in n[0]:
             phone = n[1].lstrip().rstrip()
+            listing.phone_number = phone
+            print "Phone: " + phone
+            break
 
-            owner.phone = phone
-            print phone
-            db.session.add(owner)
-            try:
-                db.session.commit()
-            except:
-                db.session.rollback()
-    owner.checked_yp = True
-    db.session.add(owner)
+    db.session.add(listing)
     db.session.commit()
             
-def getNumbers():
-    working_list = db.session.query(Owner).filter(Owner.checked_yp==False).all()
+def getNumbers(db):
+    working_list = db.session.query(Listing).join(Owner).filter(Listing.notes != None).filter(Listing.phone_number == None).filter(Listing.city.in_(local_cities)).order_by(Listing.exp_date.desc()).all()
     print len(working_list)
-    for n, owner in enumerate(working_list):
+    for n, listing in enumerate(working_list):
         print float(n)/len(working_list)
-        print owner
-        parser(owner)
+        print listing.phone_number
+        parser(db, listing)
         print
 
 if __name__ == '__main__':
     app = Flask(__name__)
     db = init_app(app)
+    count = 0
     with app.app_context():
-        _add_data()
-        getNumbers()
-    print "Done!"
+        for q in Listing.query.filter(Listing.city.in_(local_cities)).filter(Listing.status == 'X').filter(Listing.notes != '').all():
+            lead = Lead()
+            break
+
+            data = {}
+            data['address'] = q.address
+            data['city'] = q.city
+            data['zipcode'] = q.zipc
+
+            data['owner_name'] = q.o1fn + ' ' + q.o1ln
+            data['owner_address'] = q.address
+            data['owner_city'] = q.city
+            data['owner_zipcode'] = q.zipc
+            data['owner_phone'] = q.phone_number
+
+            data['notes'] = 'ALPHA LEAD\n' + q.notes
+            data['phone_status'] = 'not_checked'
+
+            lead.date_created = datetime.datetime.now()-datetime.timedelta(days=39)
+            lead.update(data)
+
+            db.session.add(lead)
+            db.session.commit()
+            print(count)
+            count+=1
+
+
+
+
+
+
+
+
+
+
+
