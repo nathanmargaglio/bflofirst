@@ -1,6 +1,0 @@
-/__init__.pyc
-/capabilities.pyc
-/dbapi20.pyc
-/test_MySQLdb_capabilities.pyc
-/test_MySQLdb_dbapi20.pyc
-/test_MySQLdb_nonstandard.pyc

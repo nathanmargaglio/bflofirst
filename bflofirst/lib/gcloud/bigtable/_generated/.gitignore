@@ -1,9 +1,0 @@
-/__init__.pyc
-/bigtable_instance_admin_pb2.pyc
-/bigtable_pb2.pyc
-/bigtable_table_admin_pb2.pyc
-/common_pb2.pyc
-/data_pb2.pyc
-/instance_pb2.pyc
-/operations_grpc_pb2.pyc
-/table_pb2.pyc
