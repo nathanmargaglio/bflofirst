@@ -29,3 +29,16 @@ example_streets = ['Marilyn Dr','Darwin Dr','Beale Ave','REDWOOD DR','Commodore 
                 'Lochland Dr','Lilac Ter','Woodcrest Ct','Shirley Ave']
 
 admins = ["nathanmargaglio@gmail.com","smargaglio@buffalofirstrealty.com"]
+moderators = ["RSMITH@BUFFALOFIRSTREALTY.COM", "ksmith@buffalofirstrealty.com", "jsmith@buffalofirstrealty.com"]
+moderators += admins
+
+MLS_USERNAME = 'smithray'
+MLS_PASSWORD = 'Gabriel2016'
+
+RETS_USERNAME = 'BUFF1ST'
+RETS_PASSWORD = 'RS11516'
+
+FACEBOOK_APP_ID = '224851544593899'
+FACEBOOK_APP_SECRET = '27a03f93a3e31837bf3591ffa9c72c03'
+FACEBOOK_APP_TOKEN = 'EAADMgFRxVesBALDgrE6t0cz6QSbc9ZAOkMtQ0EHqFRJLWmODZAREy0mrHwZAHQcfy7gYzKGkKzxjOZAfm2HfeGXMIP6kEHtK1ZALfQ0BuPoc1ZA4rat2VwJv4bJwZCeNrQOx6ZBex02Ocm5J1eFVZB6S0TNUkMUyGtTFbPjq5uyz0BgZDZD'
+
