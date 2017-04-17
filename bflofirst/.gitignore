@@ -1,3 +1,2 @@
-/config.pyc
-/crawler.pyc
-/db_manager.pyc
+config.py
+*.pyc
